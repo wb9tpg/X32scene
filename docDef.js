@@ -191,7 +191,7 @@ class DocumentDefinition {
 				insSels.push(cell(insert.sel));
 
 				// gates.push(cell(gate.on, gate.thr));
-				eqs.push(cell(eq.on));
+				eqOns.push(cell(eq.on));
 				// compThrs.push(cell())
 				dynThrs.push(cell(dyn.on,dyn.thr));
 				mainPans.push(cell(mix.st,mix.pan));
@@ -269,7 +269,6 @@ class DocumentDefinition {
 					{},
 				],
 			);
-			this.addContent(tabConfigurations);
 
 			tabPreamps.table.body.push(
 				// Preamp Header
@@ -311,7 +310,6 @@ class DocumentDefinition {
 					{text: lowcuts[8],style:'tableHeader'},
 				],
 			);
-			this.addContent(tabPreamps);
 
 			tabGates.table.body.push(
 				// Gate Header
@@ -440,7 +438,6 @@ class DocumentDefinition {
 					{text: gateFilterFreqs[8],style:'tableHeader'},
 				],				
 			);
-			this.addContent(tabGates);
 
 			tabDynamics.table.body.push(
 				// Dynamics Header
@@ -646,10 +643,9 @@ class DocumentDefinition {
 					{text: dynFilterFreqs[8],style:'tableHeader'},
 				],
 			);
-			this.addContent(tabDynamics);			
 
 			tabInserts.table.body.push(
-				// Dynamics Header
+				// Inserts Header
 				[ {text:'Inserts',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
 				// Column Titles	
 				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
@@ -687,7 +683,31 @@ class DocumentDefinition {
 					{text: insSels[8],style:'tableHeader'},
 				],				
 			);
+			
+			this.addContent(tabConfigurations);
+			this.addContent(tabPreamps);
+			this.addContent(tabGates);
+			this.addContent(tabDynamics);			
 			this.addContent(tabInserts);
+
+			tabEqs.table.body.push(
+				// Inserts Header
+				[ {text:'Equalizer Settings',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
+				// Column Titles	
+				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
+				[
+					{text: eqOns[0],style:'rowHeader'},
+					{text: eqOns[1],style:'tableHeader'},
+					{text: eqOns[2],style:'tableHeader'},
+					{text: eqOns[3],style:'tableHeader'},
+					{text: eqOns[4],style:'tableHeader'},
+					{text: eqOns[5],style:'tableHeader'},
+					{text: eqOns[6],style:'tableHeader'},
+					{text: eqOns[7],style:'tableHeader'},
+					{text: eqOns[8],style:'tableHeader'},
+				],				
+			);
+			this.addContent(tabEqs);
 
 			tab1.table.body.push(
 
@@ -698,7 +718,6 @@ class DocumentDefinition {
 
 
 
-				eqs,
 				mainPans,
 
 
