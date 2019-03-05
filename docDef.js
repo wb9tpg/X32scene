@@ -91,7 +91,6 @@ class DocumentDefinition {
 			var gateFilterTypes = rowHeader('Filter Type');
 			var gateFilterFreqs = rowHeader('Filter Freq (Hz)');
 
-
 			// Dynamics Section
 			var dynOns  = rowHeader('On / Off');
 			var dynModes = rowHeader('Comp / Exp');
@@ -112,10 +111,13 @@ class DocumentDefinition {
 			var dynFilterTypes = rowHeader('Filter Type');
 			var dynFilterFreqs = rowHeader('Filter Freq (Hz)');
 
+			// Inserts
+			var insOns  = rowHeader('On / Off');
+			var insPoss = rowHeader('Insert Pre/Post');
+			var insSels = rowHeader('Selection');
 			
 			// var gates   = rowHeader('Gate Thr(dB)');
-			var inserts = rowHeader('Insert Pre/Post');
-			var eqs     = rowHeader('Eq');
+			var eqOns     = rowHeader('On / Off');
 			var mainPans = rowHeader('Main Pan');
 
 
@@ -163,7 +165,6 @@ class DocumentDefinition {
 				gateFilterTypes.push(cell(gate.filter.type));
 				gateFilterFreqs.push(cell(gate.filter.f));
 
-
 				// dynamics
 				dynOns.push(cell(dyn.on));
 				dynModes.push(cell(dyn.mode));
@@ -184,8 +185,12 @@ class DocumentDefinition {
 				dynFilterTypes.push(cell(dyn.filter.type));
 				dynFilterFreqs.push(cell(dyn.filter.f));
 
+				// Inserts
+				insOns.push(cell(insert.on));
+				insPoss.push(cell(insert.pos));
+				insSels.push(cell(insert.sel));
+
 				// gates.push(cell(gate.on, gate.thr));
-				inserts.push(cell(insert.on, insert.pos));
 				eqs.push(cell(eq.on));
 				// compThrs.push(cell())
 				dynThrs.push(cell(dyn.on,dyn.thr));
@@ -640,17 +645,49 @@ class DocumentDefinition {
 					{text: dynFilterFreqs[7],style:'tableHeader'},
 					{text: dynFilterFreqs[8],style:'tableHeader'},
 				],
-
-				// dynKeysrcs.push(cell(dyn.keysrc));
-				// dynMixs.push(cell(dyn.mix));
-				// dynAutos.push(cell(dyn.auto));
-				// dynFilterOns.push(cell(dyn.filter.on));
-				// dynFilterTypes.push(cell(dyn.filter.type));
-				// dynFilterFreqs.push(cell(dyn.filter.f));
-
-
 			);
 			this.addContent(tabDynamics);			
+
+			tabInserts.table.body.push(
+				// Dynamics Header
+				[ {text:'Inserts',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
+				// Column Titles	
+				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
+				[
+					{text: insOns[0],style:'rowHeader'},
+					{text: insOns[1],style:'tableHeader'},
+					{text: insOns[2],style:'tableHeader'},
+					{text: insOns[3],style:'tableHeader'},
+					{text: insOns[4],style:'tableHeader'},
+					{text: insOns[5],style:'tableHeader'},
+					{text: insOns[6],style:'tableHeader'},
+					{text: insOns[7],style:'tableHeader'},
+					{text: insOns[8],style:'tableHeader'},
+				],				
+				[
+					{text: insPoss[0],style:'rowHeader'},
+					{text: insPoss[1],style:'tableHeader'},
+					{text: insPoss[2],style:'tableHeader'},
+					{text: insPoss[3],style:'tableHeader'},
+					{text: insPoss[4],style:'tableHeader'},
+					{text: insPoss[5],style:'tableHeader'},
+					{text: insPoss[6],style:'tableHeader'},
+					{text: insPoss[7],style:'tableHeader'},
+					{text: insPoss[8],style:'tableHeader'},
+				],				
+				[
+					{text: insSels[0],style:'rowHeader'},
+					{text: insSels[1],style:'tableHeader'},
+					{text: insSels[2],style:'tableHeader'},
+					{text: insSels[3],style:'tableHeader'},
+					{text: insSels[4],style:'tableHeader'},
+					{text: insSels[5],style:'tableHeader'},
+					{text: insSels[6],style:'tableHeader'},
+					{text: insSels[7],style:'tableHeader'},
+					{text: insSels[8],style:'tableHeader'},
+				],				
+			);
+			this.addContent(tabInserts);
 
 			tab1.table.body.push(
 
@@ -661,7 +698,6 @@ class DocumentDefinition {
 
 
 
-				inserts,
 				eqs,
 				mainPans,
 
