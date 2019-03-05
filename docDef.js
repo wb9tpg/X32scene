@@ -170,6 +170,18 @@ class DocumentDefinition {
 					{text: delays[7],style:'tableHeader'},
 					{text: delays[8],style:'tableHeader'},
 				],
+				// Linked settings
+				[ 
+					{text: links[0],style:'rowHeader'},
+					{text: links[1],style:'tableHeader',colSpan:2},
+					{},
+					{text: links[3],style:'tableHeader',colSpan:2},
+					{},
+					{text: links[5],style:'tableHeader',colSpan:2},
+					{},
+					{text: links[7],style:'tableHeader',colSpan:2},
+					{},
+				],
 				// Preamp Header
 				[ {text:'Preamp',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
 				// Column Titles	
@@ -186,7 +198,6 @@ class DocumentDefinition {
 					{text: trims[7],style:'tableHeader'},
 					{text: trims[8],style:'tableHeader'},
 				],
-				links,
 				gates,
 				inserts,
 				dynPos,
