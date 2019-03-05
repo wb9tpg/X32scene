@@ -59,11 +59,17 @@ class DocumentDefinition {
 			var ChIds = [
 				'','Ch'+chN[0], 'Ch'+chN[1], 'Ch'+chN[2], 'Ch'+chN[3], 'Ch'+chN[4], 'Ch'+chN[5], 'Ch'+chN[6], 'Ch'+chN[7]
 			];
-			// var names = [{text: 'Name', style: 'tableHeader'}];
+			// Configuration Section
 			var names   = rowHeader('Name');
 			var colors  = rowHeader('Color');
-			var trims   = rowHeader('Trim (dB)');
+			var sources = rowHeader('Input Bus');
+			var ports   = rowHeader('Source');
+			var delays  = rowHeader('Delay');
 			var links   = rowHeader('Linked');
+			// Preamp Section
+			var trims   = rowHeader('Trim (dB)');
+			var inverts = rowHeader('Reverse');
+
 			var gates   = rowHeader('Gate Thr(dB)');
 			var inserts = rowHeader('Insert Pre/Post');
 			var dynPos  = rowHeader('Dyn Pre/Post')
@@ -71,9 +77,6 @@ class DocumentDefinition {
 			var dynThrs= rowHeader('Compr Thr(dB)');
 			var mainPans = rowHeader('Main Pan');
 
-			var sources = rowHeader('Input Bus');
-			var ports   = rowHeader('Source');
-			var delays  = rowHeader('Delay');
 			var lowCuts = rowHeader('Low Cut');
 
 			for (var j=0; j<8; j++) {
@@ -91,16 +94,19 @@ class DocumentDefinition {
 				var autoMix = this.x32['ch'][chId]['automix'];			
 				var source = this.x32['ch'][chN[j]]['config']['source']; 
 
+
 				IDs.push('Ch'+chId);
 				ChIds.push({text: 'Ch'+chId});
+				
+				// Configuration
 				names.push(cell(config.name));
 				colors.push(cell(config.color));
 				ports.push({text: (config.source=='OFF')? Off : this.x32['config']['routing']['ports'][source], style: 'tableCell'});
 				delays.push(cell(delay.on, delay.time));
+				links.push((typeof config['linked'] === 'undefined') ? {} : {text: ((config.linked=='ON')?On:Off), style:'tableCell', colSpan:2 } );
 
 
 				trims.push(cell(preamp.trim));
-				links.push((typeof config['linked'] === 'undefined') ? {} : {text: ((config.linked=='ON')?On:Off), style:'tableCell', colSpan:2 } );
 				gates.push(cell(gate.on, gate.thr));
 				inserts.push(cell(insert.on, insert.pos));
 				dynPos.push(cell(dyn.pos));
