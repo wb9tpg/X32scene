@@ -38,7 +38,8 @@ var styles = {
 		bold: true,
 		fontSize: 18,
 		color: 'black',
-		margin: [0, 15, 0, 5]
+		margin: [0, 15, 0, 5],
+		alignment: 'center'
 	},
 	tableHeader: {
 		bold: true,

@@ -66,14 +66,32 @@ class DocumentDefinition {
 			var ports   = rowHeader('Source');
 			var delays  = rowHeader('Delay');
 			var links   = rowHeader('Linked');
+
 			// Preamp Section
 			var trims   = rowHeader('Trim (dB)');
 			var inverts = rowHeader('Reverse / Invert');
 			var lowcuts = rowHeader('Low Cut');
 
-			var gates   = rowHeader('Gate Thr(dB)');
+			// Gate Section
+			var gateOns  = rowHeader('On / Off');
+			var gateModes = rowHeader('Mode');
+			var gateThrs  = rowHeader('Threshold (dB)');
+			var gateRanges = rowHeader('Range (dB)');
+			var gateAttacks = rowHeader('Attack (ms)');
+			var gateHolds = rowHeader('Hold (ms)');
+			var gateReleases = rowHeader('Release (ms)');
+			var gateKeysrcs = rowHeader('Key Source');
+			var gateFilterOns = rowHeader('Filter On/Off');
+			var gateFilterTypes = rowHeader('Filter Type');
+			var gateFilterFreqs = rowHeader('Filter Freq (Hz)');
+
+
+			// Dynamics Section
+
+			
+			// var gates   = rowHeader('Gate Thr(dB)');
 			var inserts = rowHeader('Insert Pre/Post');
-			var dynPos  = rowHeader('Dyn Pre/Post')
+			var dynPos  = rowHeader('Pre/Post')
 			var eqs     = rowHeader('Eq');
 			var dynThrs= rowHeader('Compr Thr(dB)');
 			var mainPans = rowHeader('Main Pan');
@@ -110,9 +128,24 @@ class DocumentDefinition {
 				inverts.push(cell(preamp.invert));
 				lowcuts.push(cell(preamp.hpon, preamp.hpf+'Hz'));
 
+				// gate
+				gateOns.push(cell(gate.on));
+				gateModes.push(cell(gate.mode));
+				gateThrs.push(cell(gate.thr));
+				gateRanges.push(cell(gate.range));
+				gateAttacks.push(cell(gate.attack));
+				gateHolds.push(cell(gate.hold));
+				gateReleases.push(cell(gate.release));
+				gateKeysrcs.push(cell(gate.keysrc));
+				gateFilterOns.push(cell(gate.filter.on));
+				gateFilterTypes.push(cell(gate.filter.type));
+				gateFilterFreqs.push(cell(gate.filter.f));
 
 
-				gates.push(cell(gate.on, gate.thr));
+				// Dynamics
+
+
+				// gates.push(cell(gate.on, gate.thr));
 				inserts.push(cell(insert.on, insert.pos));
 				dynPos.push(cell(dyn.pos));
 				eqs.push(cell(eq.on));
@@ -234,6 +267,135 @@ class DocumentDefinition {
 				[ {text:'Gate',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
 				// Column Titles	
 				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
+				[
+					{text: gateOns[0],style:'rowHeader'},
+					{text: gateOns[1],style:'tableHeader'},
+					{text: gateOns[2],style:'tableHeader'},
+					{text: gateOns[3],style:'tableHeader'},
+					{text: gateOns[4],style:'tableHeader'},
+					{text: gateOns[5],style:'tableHeader'},
+					{text: gateOns[6],style:'tableHeader'},
+					{text: gateOns[7],style:'tableHeader'},
+					{text: gateOns[8],style:'tableHeader'},
+				],
+								[
+					{text: gateModes[0],style:'rowHeader'},
+					{text: gateModes[1],style:'tableHeader'},
+					{text: gateModes[2],style:'tableHeader'},
+					{text: gateModes[3],style:'tableHeader'},
+					{text: gateModes[4],style:'tableHeader'},
+					{text: gateModes[5],style:'tableHeader'},
+					{text: gateModes[6],style:'tableHeader'},
+					{text: gateModes[7],style:'tableHeader'},
+					{text: gateModes[8],style:'tableHeader'},
+				],
+				[
+					{text: gateThrs[0],style:'rowHeader'},
+					{text: gateThrs[1],style:'tableHeader'},
+					{text: gateThrs[2],style:'tableHeader'},
+					{text: gateThrs[3],style:'tableHeader'},
+					{text: gateThrs[4],style:'tableHeader'},
+					{text: gateThrs[5],style:'tableHeader'},
+					{text: gateThrs[6],style:'tableHeader'},
+					{text: gateThrs[7],style:'tableHeader'},
+					{text: gateThrs[8],style:'tableHeader'},
+				],
+				[
+					{text: gateRanges[0],style:'rowHeader'},
+					{text: gateRanges[1],style:'tableHeader'},
+					{text: gateRanges[2],style:'tableHeader'},
+					{text: gateRanges[3],style:'tableHeader'},
+					{text: gateRanges[4],style:'tableHeader'},
+					{text: gateRanges[5],style:'tableHeader'},
+					{text: gateRanges[6],style:'tableHeader'},
+					{text: gateRanges[7],style:'tableHeader'},
+					{text: gateRanges[8],style:'tableHeader'},
+				],
+				[
+					{text: gateAttacks[0],style:'rowHeader'},
+					{text: gateAttacks[1],style:'tableHeader'},
+					{text: gateAttacks[2],style:'tableHeader'},
+					{text: gateAttacks[3],style:'tableHeader'},
+					{text: gateAttacks[4],style:'tableHeader'},
+					{text: gateAttacks[5],style:'tableHeader'},
+					{text: gateAttacks[6],style:'tableHeader'},
+					{text: gateAttacks[7],style:'tableHeader'},
+					{text: gateAttacks[8],style:'tableHeader'},
+				],
+				[
+					{text: gateHolds[0],style:'rowHeader'},
+					{text: gateHolds[1],style:'tableHeader'},
+					{text: gateHolds[2],style:'tableHeader'},
+					{text: gateHolds[3],style:'tableHeader'},
+					{text: gateHolds[4],style:'tableHeader'},
+					{text: gateHolds[5],style:'tableHeader'},
+					{text: gateHolds[6],style:'tableHeader'},
+					{text: gateHolds[7],style:'tableHeader'},
+					{text: gateHolds[8],style:'tableHeader'},
+				],
+				[
+					{text: gateReleases[0],style:'rowHeader'},
+					{text: gateReleases[1],style:'tableHeader'},
+					{text: gateReleases[2],style:'tableHeader'},
+					{text: gateReleases[3],style:'tableHeader'},
+					{text: gateReleases[4],style:'tableHeader'},
+					{text: gateReleases[5],style:'tableHeader'},
+					{text: gateReleases[6],style:'tableHeader'},
+					{text: gateReleases[7],style:'tableHeader'},
+					{text: gateReleases[8],style:'tableHeader'},
+				],
+				[
+					{text: gateKeysrcs[0],style:'rowHeader'},
+					{text: gateKeysrcs[1],style:'tableHeader'},
+					{text: gateKeysrcs[2],style:'tableHeader'},
+					{text: gateKeysrcs[3],style:'tableHeader'},
+					{text: gateKeysrcs[4],style:'tableHeader'},
+					{text: gateKeysrcs[5],style:'tableHeader'},
+					{text: gateKeysrcs[6],style:'tableHeader'},
+					{text: gateKeysrcs[7],style:'tableHeader'},
+					{text: gateKeysrcs[8],style:'tableHeader'},
+				],
+				[
+					{text: gateFilterOns[0],style:'rowHeader'},
+					{text: gateFilterOns[1],style:'tableHeader'},
+					{text: gateFilterOns[2],style:'tableHeader'},
+					{text: gateFilterOns[3],style:'tableHeader'},
+					{text: gateFilterOns[4],style:'tableHeader'},
+					{text: gateFilterOns[5],style:'tableHeader'},
+					{text: gateFilterOns[6],style:'tableHeader'},
+					{text: gateFilterOns[7],style:'tableHeader'},
+					{text: gateFilterOns[8],style:'tableHeader'},
+				],
+				[
+					{text: gateFilterTypes[0],style:'rowHeader'},
+					{text: gateFilterTypes[1],style:'tableHeader'},
+					{text: gateFilterTypes[2],style:'tableHeader'},
+					{text: gateFilterTypes[3],style:'tableHeader'},
+					{text: gateFilterTypes[4],style:'tableHeader'},
+					{text: gateFilterTypes[5],style:'tableHeader'},
+					{text: gateFilterTypes[6],style:'tableHeader'},
+					{text: gateFilterTypes[7],style:'tableHeader'},
+					{text: gateFilterTypes[8],style:'tableHeader'},
+				],
+				[
+					{text: gateFilterFreqs[0],style:'rowHeader'},
+					{text: gateFilterFreqs[1],style:'tableHeader'},
+					{text: gateFilterFreqs[2],style:'tableHeader'},
+					{text: gateFilterFreqs[3],style:'tableHeader'},
+					{text: gateFilterFreqs[4],style:'tableHeader'},
+					{text: gateFilterFreqs[5],style:'tableHeader'},
+					{text: gateFilterFreqs[6],style:'tableHeader'},
+					{text: gateFilterFreqs[7],style:'tableHeader'},
+					{text: gateFilterFreqs[8],style:'tableHeader'},
+				],
+
+
+
+
+
+
+
+
 				// Dynamics Header
 				[ {text:'Dynamics / Compressor',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
 				// Column Titles	
@@ -241,7 +403,6 @@ class DocumentDefinition {
 
 
 
-				gates,
 				inserts,
 				dynPos,
 				eqs,
@@ -264,6 +425,7 @@ function cell (text, onOption='') {
 	// console.log(text, onOption)
 	text = (text == 'OFF') ? Off : text;
 	text = (text == 'POST') ? 'Post' : text;
+	text = (text == 'GATE') ? 'Gate' : text;
 	text = (text == 'ON' && onOption != '') ? onOption : text;
 	text = (text == 'ON' && onOption == '') ? On : text;
 	return {text: text, style: 'tableCell'};
