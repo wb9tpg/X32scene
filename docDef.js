@@ -683,12 +683,6 @@ class DocumentDefinition {
 					{text: insSels[8],style:'tableHeader'},
 				],				
 			);
-			
-			this.addContent(tabConfigurations);
-			this.addContent(tabPreamps);
-			this.addContent(tabGates);
-			this.addContent(tabDynamics);			
-			this.addContent(tabInserts);
 
 			tabEqs.table.body.push(
 				// Inserts Header
@@ -707,6 +701,13 @@ class DocumentDefinition {
 					{text: eqOns[8],style:'tableHeader'},
 				],				
 			);
+
+			// Add the tables to the document
+			this.addContent(tabConfigurations);
+			this.addContent(tabPreamps);
+			this.addContent(tabGates);
+			this.addContent(tabDynamics);			
+			this.addContent(tabInserts);
 			this.addContent(tabEqs);
 
 			tab1.table.body.push(
