@@ -46,6 +46,10 @@ class DocumentDefinition {
 		for (var i=0; i<32; i=i+8) {
 			var w = 42;
 			var tab1 = {style: 'tableExample', table: { widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
+			var tabConfigurations = {style: 'tableExample', table: { widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
+			var tabPreamps = {style: 'tableExample', table: { widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
+			var tabGates = {style: 'tableExample', table: { widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
+			var tabDynamics = {style: 'tableExample', table: { widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
 			// var tab2 = {style: 'tableExample', table: {headerRows: 2, body: [] }};
 			this.addContent({
 				text: 'Channels',
@@ -158,7 +162,7 @@ class DocumentDefinition {
 				// lowCuts.push({text: (preamp.hpon=='OFF')? Off : preamp.hpf+'Hz', style: 'tableCell'}); 
 			}
 
-			tab1.table.body.push(
+			tabConfigurations.table.body.push(
 				// Configuration Header
 				[ {text:'Configuration',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
 				// Column Titles	
@@ -225,6 +229,10 @@ class DocumentDefinition {
 					{text: links[7],style:'tableHeader',colSpan:2},
 					{},
 				],
+			);
+			this.addContent(tabConfigurations);
+
+			tabPreamps.table.body.push(
 				// Preamp Header
 				[ {text:'Preamp',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
 				// Column Titles	
@@ -263,6 +271,10 @@ class DocumentDefinition {
 					{text: lowcuts[7],style:'tableHeader'},
 					{text: lowcuts[8],style:'tableHeader'},
 				],
+			);
+			this.addContent(tabPreamps);
+
+			tabGates.table.body.push(
 				// Gate Header
 				[ {text:'Gate',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
 				// Column Titles	
@@ -387,17 +399,22 @@ class DocumentDefinition {
 					{text: gateFilterFreqs[6],style:'tableHeader'},
 					{text: gateFilterFreqs[7],style:'tableHeader'},
 					{text: gateFilterFreqs[8],style:'tableHeader'},
-				],
+				],				
+			);
+			this.addContent(tabGates);
 
-
-
-
-
-
-
-
+			tabDynamics.table.body.push(
 				// Dynamics Header
 				[ {text:'Dynamics / Compressor',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
+				// Column Titles	
+				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
+			);
+			this.addContent(tabDynamics);			
+
+			tab1.table.body.push(
+
+				// Dynamics Header
+				[ {text:'tab1',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
 				// Column Titles	
 				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
 
