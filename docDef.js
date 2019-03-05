@@ -95,6 +95,7 @@ class DocumentDefinition {
 				ChIds.push({text: 'Ch'+chId});
 				names.push(cell(config.name));
 				colors.push(cell(config.color));
+				ports.push({text: (config.source=='OFF')? Off : this.x32['config']['routing']['ports'][source], style: 'tableCell'});
 				trims.push(cell(preamp.trim));
 				links.push((typeof config['linked'] === 'undefined') ? {} : {text: ((config.linked=='ON')?On:Off), style:'tableCell', colSpan:2 } );
 				gates.push(cell(gate.on, gate.thr));
@@ -107,15 +108,12 @@ class DocumentDefinition {
 
 
 				// sources.push({text: config.source, style: 'tableCell'});
-				ports.push({text: (config.source=='OFF')? Off : this.x32['config']['routing']['ports'][source], style: 'tableCell'});
 				delays.push(cell(delay.on, delay.time));
 				lowCuts.push(cell(preamp.hpon, preamp.hpf+'Hz'));
 				// lowCuts.push({text: (preamp.hpon=='OFF')? Off : preamp.hpf+'Hz', style: 'tableCell'}); 
 			}
 
 			tab1.table.body.push(
-				// Temporary Design Aid Index Row
-				['0','1','2','3','4','5','6','7','8',],
 				// Column Titles	
 				[
 					{text:''},
@@ -128,6 +126,8 @@ class DocumentDefinition {
 					{text: ChIds[7],style:'tableHeader'},
 					{text: ChIds[8],style:'tableHeader'},
 				],
+				// Temporary Design Aid Index Row
+				['0','1','2','3','4','5','6','7','8',],
 				// Scribble Strip Names
 				[
 					{text: names[0],style:'rowHeader'},
@@ -152,7 +152,17 @@ class DocumentDefinition {
 					{text: colors[7],style:'tableHeader'},
 					{text: colors[8],style:'tableHeader'},
 				],
-
+				[ 
+					{text: ports[0],style:'rowHeader'},
+					{text: ports[1],style:'tableHeader'},
+					{text: ports[2],style:'tableHeader'},
+					{text: ports[3],style:'tableHeader'},
+					{text: ports[4],style:'tableHeader'},
+					{text: ports[5],style:'tableHeader'},
+					{text: ports[6],style:'tableHeader'},
+					{text: ports[7],style:'tableHeader'},
+					{text: ports[8],style:'tableHeader'},
+				],
 				// Column Titles	
 				[
 					{text:''},
