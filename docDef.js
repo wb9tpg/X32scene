@@ -28,7 +28,6 @@ class DocumentDefinition {
 	}
 
 	titlePage ( ) {
-		console.log(this.x32.name)
 		this.addContent({
 			text: this.x32.name, 
 			style: 'title'
@@ -114,23 +113,7 @@ class DocumentDefinition {
 				// lowCuts.push({text: (preamp.hpon=='OFF')? Off : preamp.hpf+'Hz', style: 'tableCell'}); 
 			}
 
-			console.log(names[1]);
-			// var id1 = ids.slice(0);
-
-
 			tab1.table.body.push(
-				// Scribble Strip 
-				[
-					{
-						text:'Scribble Strip',
-						style:'sectionHeader',
-						alignment: 'center',
-						colSpan: 9,
-						border: [false,false,false,false]
-
-					},
-					{},{},{},{},{},{},{},{}
-				],
 				// Temporary Design Aid Index Row
 				['0','1','2','3','4','5','6','7','8',],
 				// Column Titles	
@@ -170,18 +153,6 @@ class DocumentDefinition {
 					{text: colors[8],style:'tableHeader'},
 				],
 
-				// Home Tab
-				[
-					{
-						text:'Home Tab',
-						style:'sectionHeader',
-						alignment: 'center',
-						colSpan: 9,
-						border: [false,false,false,false]
-
-					},
-					{},{},{},{},{},{},{},{}
-				],
 				// Column Titles	
 				[
 					{text:''},
