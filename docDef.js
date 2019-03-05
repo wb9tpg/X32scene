@@ -96,6 +96,9 @@ class DocumentDefinition {
 				names.push(cell(config.name));
 				colors.push(cell(config.color));
 				ports.push({text: (config.source=='OFF')? Off : this.x32['config']['routing']['ports'][source], style: 'tableCell'});
+				delays.push(cell(delay.on, delay.time));
+
+
 				trims.push(cell(preamp.trim));
 				links.push((typeof config['linked'] === 'undefined') ? {} : {text: ((config.linked=='ON')?On:Off), style:'tableCell', colSpan:2 } );
 				gates.push(cell(gate.on, gate.thr));
@@ -108,7 +111,6 @@ class DocumentDefinition {
 
 
 				// sources.push({text: config.source, style: 'tableCell'});
-				delays.push(cell(delay.on, delay.time));
 				lowCuts.push(cell(preamp.hpon, preamp.hpf+'Hz'));
 				// lowCuts.push({text: (preamp.hpon=='OFF')? Off : preamp.hpf+'Hz', style: 'tableCell'}); 
 			}
@@ -152,6 +154,7 @@ class DocumentDefinition {
 					{text: colors[7],style:'tableHeader'},
 					{text: colors[8],style:'tableHeader'},
 				],
+				// Port selected
 				[ 
 					{text: ports[0],style:'rowHeader'},
 					{text: ports[1],style:'tableHeader'},
@@ -162,6 +165,18 @@ class DocumentDefinition {
 					{text: ports[6],style:'tableHeader'},
 					{text: ports[7],style:'tableHeader'},
 					{text: ports[8],style:'tableHeader'},
+				],
+				// Delay settings
+				[ 
+					{text: delays[0],style:'rowHeader'},
+					{text: delays[1],style:'tableHeader'},
+					{text: delays[2],style:'tableHeader'},
+					{text: delays[3],style:'tableHeader'},
+					{text: delays[4],style:'tableHeader'},
+					{text: delays[5],style:'tableHeader'},
+					{text: delays[6],style:'tableHeader'},
+					{text: delays[7],style:'tableHeader'},
+					{text: delays[8],style:'tableHeader'},
 				],
 				// Column Titles	
 				[
