@@ -45,18 +45,14 @@ class DocumentDefinition {
 	channelPage ( ) {
 		for (var i=0; i<32; i=i+8) {
 			var w = 42;
-			var tabConfigurations = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
+			var tabConfigurations = {pageBreak: 'before',style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
 			var tabPreamps = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
 			var tabGates = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
 			var tabDynamics = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
 			var tabInserts = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
 			var tabEqs = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
-			// var tab2 = {style: 'tableExample', table: {headerRows: 2, body: [] }};
-			this.addContent({
-				text: 'Channels',
-				style: 'header',
-				pageBreak: 'before'
-			});
+			var tabMixs = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
+
 			var chN = [(i+1).pad(),(i+2).pad(),(i+3).pad(),(i+4).pad(),
 			           (i+5).pad(),(i+6).pad(),(i+7).pad(),(i+8).pad()];
 			// var ids = [{text: ' ',border:[false,false,false,false]}]
@@ -118,20 +114,20 @@ class DocumentDefinition {
 			// var gates   = rowHeader('Gate Thr(dB)');
 			var eqOns     = rowHeader('On / Off');
 			var eq1Types  = rowHeader('#1 Type');
-			var eq1Fs     = rowHeader('#1 Frequency');
-			var eq1Gs     = rowHeader('#1 Gain');
+			var eq1Fs     = rowHeader('#1 Frequency (Hz)');
+			var eq1Gs     = rowHeader('#1 Gain (dB)');
 			var eq1Qs     = rowHeader('#1 Q');
 			var eq2Types  = rowHeader('#2 Type');
-			var eq2Fs     = rowHeader('#2 Frequency');
-			var eq2Gs     = rowHeader('#2 Gain');
+			var eq2Fs     = rowHeader('#2 Frequency (Hz)');
+			var eq2Gs     = rowHeader('#2 Gain (dB)');
 			var eq2Qs     = rowHeader('#2 Q');
 			var eq3Types  = rowHeader('#3 Type');
-			var eq3Fs     = rowHeader('#3 Frequency');
-			var eq3Gs     = rowHeader('#3 Gain');
+			var eq3Fs     = rowHeader('#3 Frequency (Hz)');
+			var eq3Gs     = rowHeader('#3 Gain (dB)');
 			var eq3Qs     = rowHeader('#3 Q');
 			var eq4Types  = rowHeader('#4 Type');
-			var eq4Fs     = rowHeader('#4 Frequency');
-			var eq4Gs     = rowHeader('#4 Gain');
+			var eq4Fs     = rowHeader('#4 Frequency (Hz)');
+			var eq4Gs     = rowHeader('#4 Gain (dB)');
 			var eq4Qs     = rowHeader('#4 Q');
 
 
@@ -208,6 +204,22 @@ class DocumentDefinition {
 				// gates.push(cell(gate.on, gate.thr));
 				eqOns.push(cell(eq.on));
 				eq1Types.push(cell(eq['1']['type']));
+				eq1Fs.push(   cell(eq['1']['f']));
+				eq1Gs.push(   cell(eq['1']['g']));
+				eq1Qs.push(   cell(eq['1']['q']));
+				eq2Types.push(cell(eq['2']['type']));
+				eq2Fs.push(   cell(eq['2']['f']));
+				eq2Gs.push(   cell(eq['2']['g']));
+				eq2Qs.push(   cell(eq['2']['q']));
+				eq3Types.push(cell(eq['3']['type']));
+				eq3Fs.push(   cell(eq['3']['f']));
+				eq3Gs.push(   cell(eq['3']['g']));
+				eq3Qs.push(   cell(eq['3']['q']));
+				eq4Types.push(cell(eq['4']['type']));
+				eq4Fs.push(   cell(eq['4']['f']));
+				eq4Gs.push(   cell(eq['4']['g']));
+				eq4Qs.push(   cell(eq['4']['q']));
+
 				// eq1Types.push(cell(eq[1]['type']))		
 				// compThrs.push(cell())
 				// dynThrs.push(cell(dyn.on,dyn.thr));
@@ -727,6 +739,171 @@ class DocumentDefinition {
 					{text: eq1Types[6],style:'tableHeader'},
 					{text: eq1Types[7],style:'tableHeader'},
 					{text: eq1Types[8],style:'tableHeader'},
+				],				
+				[
+					{text: eq1Fs[0],style:'rowHeader'},
+					{text: eq1Fs[1],style:'tableHeader'},
+					{text: eq1Fs[2],style:'tableHeader'},
+					{text: eq1Fs[3],style:'tableHeader'},
+					{text: eq1Fs[4],style:'tableHeader'},
+					{text: eq1Fs[5],style:'tableHeader'},
+					{text: eq1Fs[6],style:'tableHeader'},
+					{text: eq1Fs[7],style:'tableHeader'},
+					{text: eq1Fs[8],style:'tableHeader'},
+				],				
+				[
+					{text: eq1Gs[0],style:'rowHeader'},
+					{text: eq1Gs[1],style:'tableHeader'},
+					{text: eq1Gs[2],style:'tableHeader'},
+					{text: eq1Gs[3],style:'tableHeader'},
+					{text: eq1Gs[4],style:'tableHeader'},
+					{text: eq1Gs[5],style:'tableHeader'},
+					{text: eq1Gs[6],style:'tableHeader'},
+					{text: eq1Gs[7],style:'tableHeader'},
+					{text: eq1Gs[8],style:'tableHeader'},
+				],				
+				[
+					{text: eq1Qs[0],style:'rowHeader'},
+					{text: eq1Qs[1],style:'tableHeader'},
+					{text: eq1Qs[2],style:'tableHeader'},
+					{text: eq1Qs[3],style:'tableHeader'},
+					{text: eq1Qs[4],style:'tableHeader'},
+					{text: eq1Qs[5],style:'tableHeader'},
+					{text: eq1Qs[6],style:'tableHeader'},
+					{text: eq1Qs[7],style:'tableHeader'},
+					{text: eq1Qs[8],style:'tableHeader'},
+				],				
+				[
+					{text: eq2Types[0],style:'rowHeader'},
+					{text: eq2Types[1],style:'tableHeader'},
+					{text: eq2Types[2],style:'tableHeader'},
+					{text: eq2Types[3],style:'tableHeader'},
+					{text: eq2Types[4],style:'tableHeader'},
+					{text: eq2Types[5],style:'tableHeader'},
+					{text: eq2Types[6],style:'tableHeader'},
+					{text: eq2Types[7],style:'tableHeader'},
+					{text: eq2Types[8],style:'tableHeader'},
+				],				
+				[
+					{text: eq2Fs[0],style:'rowHeader'},
+					{text: eq2Fs[1],style:'tableHeader'},
+					{text: eq2Fs[2],style:'tableHeader'},
+					{text: eq2Fs[3],style:'tableHeader'},
+					{text: eq2Fs[4],style:'tableHeader'},
+					{text: eq2Fs[5],style:'tableHeader'},
+					{text: eq2Fs[6],style:'tableHeader'},
+					{text: eq2Fs[7],style:'tableHeader'},
+					{text: eq2Fs[8],style:'tableHeader'},
+				],				
+				[
+					{text: eq2Gs[0],style:'rowHeader'},
+					{text: eq2Gs[1],style:'tableHeader'},
+					{text: eq2Gs[2],style:'tableHeader'},
+					{text: eq2Gs[3],style:'tableHeader'},
+					{text: eq2Gs[4],style:'tableHeader'},
+					{text: eq2Gs[5],style:'tableHeader'},
+					{text: eq2Gs[6],style:'tableHeader'},
+					{text: eq2Gs[7],style:'tableHeader'},
+					{text: eq2Gs[8],style:'tableHeader'},
+				],				
+				[
+					{text: eq2Qs[0],style:'rowHeader'},
+					{text: eq2Qs[1],style:'tableHeader'},
+					{text: eq2Qs[2],style:'tableHeader'},
+					{text: eq2Qs[3],style:'tableHeader'},
+					{text: eq2Qs[4],style:'tableHeader'},
+					{text: eq2Qs[5],style:'tableHeader'},
+					{text: eq2Qs[6],style:'tableHeader'},
+					{text: eq2Qs[7],style:'tableHeader'},
+					{text: eq2Qs[8],style:'tableHeader'},
+				],				
+				[
+					{text: eq3Types[0],style:'rowHeader'},
+					{text: eq3Types[1],style:'tableHeader'},
+					{text: eq3Types[2],style:'tableHeader'},
+					{text: eq3Types[3],style:'tableHeader'},
+					{text: eq3Types[4],style:'tableHeader'},
+					{text: eq3Types[5],style:'tableHeader'},
+					{text: eq3Types[6],style:'tableHeader'},
+					{text: eq3Types[7],style:'tableHeader'},
+					{text: eq3Types[8],style:'tableHeader'},
+				],				
+				[
+					{text: eq3Fs[0],style:'rowHeader'},
+					{text: eq3Fs[1],style:'tableHeader'},
+					{text: eq3Fs[2],style:'tableHeader'},
+					{text: eq3Fs[3],style:'tableHeader'},
+					{text: eq3Fs[4],style:'tableHeader'},
+					{text: eq3Fs[5],style:'tableHeader'},
+					{text: eq3Fs[6],style:'tableHeader'},
+					{text: eq3Fs[7],style:'tableHeader'},
+					{text: eq3Fs[8],style:'tableHeader'},
+				],				
+				[
+					{text: eq3Gs[0],style:'rowHeader'},
+					{text: eq3Gs[1],style:'tableHeader'},
+					{text: eq3Gs[2],style:'tableHeader'},
+					{text: eq3Gs[3],style:'tableHeader'},
+					{text: eq3Gs[4],style:'tableHeader'},
+					{text: eq3Gs[5],style:'tableHeader'},
+					{text: eq3Gs[6],style:'tableHeader'},
+					{text: eq3Gs[7],style:'tableHeader'},
+					{text: eq3Gs[8],style:'tableHeader'},
+				],				
+				[
+					{text: eq3Qs[0],style:'rowHeader'},
+					{text: eq3Qs[1],style:'tableHeader'},
+					{text: eq3Qs[2],style:'tableHeader'},
+					{text: eq3Qs[3],style:'tableHeader'},
+					{text: eq3Qs[4],style:'tableHeader'},
+					{text: eq3Qs[5],style:'tableHeader'},
+					{text: eq3Qs[6],style:'tableHeader'},
+					{text: eq3Qs[7],style:'tableHeader'},
+					{text: eq3Qs[8],style:'tableHeader'},
+				],				
+				[
+					{text: eq4Types[0],style:'rowHeader'},
+					{text: eq4Types[1],style:'tableHeader'},
+					{text: eq4Types[2],style:'tableHeader'},
+					{text: eq4Types[3],style:'tableHeader'},
+					{text: eq4Types[4],style:'tableHeader'},
+					{text: eq4Types[5],style:'tableHeader'},
+					{text: eq4Types[6],style:'tableHeader'},
+					{text: eq4Types[7],style:'tableHeader'},
+					{text: eq4Types[8],style:'tableHeader'},
+				],				
+				[
+					{text: eq4Fs[0],style:'rowHeader'},
+					{text: eq4Fs[1],style:'tableHeader'},
+					{text: eq4Fs[2],style:'tableHeader'},
+					{text: eq4Fs[3],style:'tableHeader'},
+					{text: eq4Fs[4],style:'tableHeader'},
+					{text: eq4Fs[5],style:'tableHeader'},
+					{text: eq4Fs[6],style:'tableHeader'},
+					{text: eq4Fs[7],style:'tableHeader'},
+					{text: eq4Fs[8],style:'tableHeader'},
+				],				
+				[
+					{text: eq4Gs[0],style:'rowHeader'},
+					{text: eq4Gs[1],style:'tableHeader'},
+					{text: eq4Gs[2],style:'tableHeader'},
+					{text: eq4Gs[3],style:'tableHeader'},
+					{text: eq4Gs[4],style:'tableHeader'},
+					{text: eq4Gs[5],style:'tableHeader'},
+					{text: eq4Gs[6],style:'tableHeader'},
+					{text: eq4Gs[7],style:'tableHeader'},
+					{text: eq4Gs[8],style:'tableHeader'},
+				],				
+				[
+					{text: eq4Qs[0],style:'rowHeader'},
+					{text: eq4Qs[1],style:'tableHeader'},
+					{text: eq4Qs[2],style:'tableHeader'},
+					{text: eq4Qs[3],style:'tableHeader'},
+					{text: eq4Qs[4],style:'tableHeader'},
+					{text: eq4Qs[5],style:'tableHeader'},
+					{text: eq4Qs[6],style:'tableHeader'},
+					{text: eq4Qs[7],style:'tableHeader'},
+					{text: eq4Qs[8],style:'tableHeader'},
 				],				
 			);
 
