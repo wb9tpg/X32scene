@@ -68,7 +68,8 @@ class DocumentDefinition {
 			var links   = rowHeader('Linked');
 			// Preamp Section
 			var trims   = rowHeader('Trim (dB)');
-			var inverts = rowHeader('Reverse');
+			var inverts = rowHeader('Reverse / Invert');
+			var lowcuts = rowHeader('Low Cut');
 
 			var gates   = rowHeader('Gate Thr(dB)');
 			var inserts = rowHeader('Insert Pre/Post');
@@ -77,7 +78,6 @@ class DocumentDefinition {
 			var dynThrs= rowHeader('Compr Thr(dB)');
 			var mainPans = rowHeader('Main Pan');
 
-			var lowCuts = rowHeader('Low Cut');
 
 			for (var j=0; j<8; j++) {
 
@@ -105,8 +105,13 @@ class DocumentDefinition {
 				delays.push(cell(delay.on, delay.time));
 				links.push((typeof config['linked'] === 'undefined') ? {} : {text: ((config.linked=='ON')?On:Off), style:'tableCell', colSpan:2 } );
 
-
+				// Preamp
 				trims.push(cell(preamp.trim));
+				inverts.push(cell(preamp.invert));
+				lowcuts.push(cell(preamp.hpon, preamp.hpf+'Hz'));
+
+
+
 				gates.push(cell(gate.on, gate.thr));
 				inserts.push(cell(insert.on, insert.pos));
 				dynPos.push(cell(dyn.pos));
@@ -117,7 +122,6 @@ class DocumentDefinition {
 
 
 				// sources.push({text: config.source, style: 'tableCell'});
-				lowCuts.push(cell(preamp.hpon, preamp.hpf+'Hz'));
 				// lowCuts.push({text: (preamp.hpon=='OFF')? Off : preamp.hpf+'Hz', style: 'tableCell'}); 
 			}
 
@@ -204,6 +208,39 @@ class DocumentDefinition {
 					{text: trims[7],style:'tableHeader'},
 					{text: trims[8],style:'tableHeader'},
 				],
+				[
+					{text: inverts[0],style:'rowHeader'},
+					{text: inverts[1],style:'tableHeader'},
+					{text: inverts[2],style:'tableHeader'},
+					{text: inverts[3],style:'tableHeader'},
+					{text: inverts[4],style:'tableHeader'},
+					{text: inverts[5],style:'tableHeader'},
+					{text: inverts[6],style:'tableHeader'},
+					{text: inverts[7],style:'tableHeader'},
+					{text: inverts[8],style:'tableHeader'},
+				],
+				[
+					{text: lowcuts[0],style:'rowHeader'},
+					{text: lowcuts[1],style:'tableHeader'},
+					{text: lowcuts[2],style:'tableHeader'},
+					{text: lowcuts[3],style:'tableHeader'},
+					{text: lowcuts[4],style:'tableHeader'},
+					{text: lowcuts[5],style:'tableHeader'},
+					{text: lowcuts[6],style:'tableHeader'},
+					{text: lowcuts[7],style:'tableHeader'},
+					{text: lowcuts[8],style:'tableHeader'},
+				],
+				// Gate Header
+				[ {text:'Gate',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
+				// Column Titles	
+				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
+				// Dynamics Header
+				[ {text:'Dynamics / Compressor',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
+				// Column Titles	
+				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
+
+
+
 				gates,
 				inserts,
 				dynPos,
