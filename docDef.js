@@ -45,7 +45,6 @@ class DocumentDefinition {
 	channelPage ( ) {
 		for (var i=0; i<32; i=i+8) {
 			var w = 42;
-			var tab1 = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
 			var tabConfigurations = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
 			var tabPreamps = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
 			var tabGates = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
@@ -118,7 +117,8 @@ class DocumentDefinition {
 			
 			// var gates   = rowHeader('Gate Thr(dB)');
 			var eqOns     = rowHeader('On / Off');
-			var mainPans = rowHeader('Main Pan');
+			var eqTypes   = rowHeader('Type');
+
 
 
 			for (var j=0; j<8; j++) {
@@ -192,9 +192,10 @@ class DocumentDefinition {
 
 				// gates.push(cell(gate.on, gate.thr));
 				eqOns.push(cell(eq.on));
+				eqTypes.push(cell(eq.type))		
 				// compThrs.push(cell())
-				dynThrs.push(cell(dyn.on,dyn.thr));
-				mainPans.push(cell(mix.st,mix.pan));
+				// dynThrs.push(cell(dyn.on,dyn.thr));
+				// mainPans.push(cell(mix.st,mix.pan));
 
 
 				// sources.push({text: config.source, style: 'tableCell'});
@@ -700,6 +701,17 @@ class DocumentDefinition {
 					{text: eqOns[7],style:'tableHeader'},
 					{text: eqOns[8],style:'tableHeader'},
 				],				
+				[
+					{text: eqTypes[0],style:'rowHeader'},
+					{text: eqTypes[1],style:'tableHeader'},
+					{text: eqTypes[2],style:'tableHeader'},
+					{text: eqTypes[3],style:'tableHeader'},
+					{text: eqTypes[4],style:'tableHeader'},
+					{text: eqTypes[5],style:'tableHeader'},
+					{text: eqTypes[6],style:'tableHeader'},
+					{text: eqTypes[7],style:'tableHeader'},
+					{text: eqTypes[8],style:'tableHeader'},
+				],				
 			);
 
 			// Add the tables to the document
@@ -710,25 +722,7 @@ class DocumentDefinition {
 			this.addContent(tabInserts);
 			this.addContent(tabEqs);
 
-			tab1.table.body.push(
 
-				// Dynamics Header
-				[ {text:'tab1',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
-				// Column Titles	
-				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
-
-
-
-				mainPans,
-
-
-				// [
-				// 	{text: names[0],style:'rowHeader'},
-				// 	names[1], names[2], names[3], names[4], names[5], names[6], names[7], names[8],
-				// ]	
-			);
-			// winston.debug(JSON.stringify(tab1, (k, v) => v === undefined ? null : v,4));
-			this.addContent(tab1);
 		}
 	}
 }
