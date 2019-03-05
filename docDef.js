@@ -116,20 +116,12 @@ class DocumentDefinition {
 			}
 
 			tab1.table.body.push(
+				// Configuration Header
+				[ {text:'Configuration',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
 				// Column Titles	
-				[
-					{text:''},
-					{text: ChIds[1],style:'tableHeader'},
-					{text: ChIds[2],style:'tableHeader'},
-					{text: ChIds[3],style:'tableHeader'},
-					{text: ChIds[4],style:'tableHeader'},
-					{text: ChIds[5],style:'tableHeader'},
-					{text: ChIds[6],style:'tableHeader'},
-					{text: ChIds[7],style:'tableHeader'},
-					{text: ChIds[8],style:'tableHeader'},
-				],
+				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
 				// Temporary Design Aid Index Row
-				['0','1','2','3','4','5','6','7','8',],
+				// ['0','1','2','3','4','5','6','7','8',],
 				// Scribble Strip Names
 				[
 					{text: names[0],style:'rowHeader'},
@@ -178,18 +170,10 @@ class DocumentDefinition {
 					{text: delays[7],style:'tableHeader'},
 					{text: delays[8],style:'tableHeader'},
 				],
+				// Preamp Header
+				[ {text:'Preamp',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
 				// Column Titles	
-				[
-					{text:''},
-					{text: ChIds[1],style:'tableHeader'},
-					{text: ChIds[2],style:'tableHeader'},
-					{text: ChIds[3],style:'tableHeader'},
-					{text: ChIds[4],style:'tableHeader'},
-					{text: ChIds[5],style:'tableHeader'},
-					{text: ChIds[6],style:'tableHeader'},
-					{text: ChIds[7],style:'tableHeader'},
-					{text: ChIds[8],style:'tableHeader'},
-				],
+				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
 				// Home Tab - Trims
 				[
 					{text: trims[0],style:'rowHeader'},
