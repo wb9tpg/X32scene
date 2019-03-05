@@ -117,7 +117,22 @@ class DocumentDefinition {
 			
 			// var gates   = rowHeader('Gate Thr(dB)');
 			var eqOns     = rowHeader('On / Off');
-			var eqTypes   = rowHeader('Type');
+			var eq1Types  = rowHeader('#1 Type');
+			var eq1Fs     = rowHeader('#1 Frequency');
+			var eq1Gs     = rowHeader('#1 Gain');
+			var eq1Qs     = rowHeader('#1 Q');
+			var eq2Types  = rowHeader('#2 Type');
+			var eq2Fs     = rowHeader('#2 Frequency');
+			var eq2Gs     = rowHeader('#2 Gain');
+			var eq2Qs     = rowHeader('#2 Q');
+			var eq3Types  = rowHeader('#3 Type');
+			var eq3Fs     = rowHeader('#3 Frequency');
+			var eq3Gs     = rowHeader('#3 Gain');
+			var eq3Qs     = rowHeader('#3 Q');
+			var eq4Types  = rowHeader('#4 Type');
+			var eq4Fs     = rowHeader('#4 Frequency');
+			var eq4Gs     = rowHeader('#4 Gain');
+			var eq4Qs     = rowHeader('#4 Q');
 
 
 
@@ -192,7 +207,8 @@ class DocumentDefinition {
 
 				// gates.push(cell(gate.on, gate.thr));
 				eqOns.push(cell(eq.on));
-				eqTypes.push(cell(eq.type))		
+				eq1Types.push(cell(eq['1']['type']));
+				// eq1Types.push(cell(eq[1]['type']))		
 				// compThrs.push(cell())
 				// dynThrs.push(cell(dyn.on,dyn.thr));
 				// mainPans.push(cell(mix.st,mix.pan));
@@ -702,15 +718,15 @@ class DocumentDefinition {
 					{text: eqOns[8],style:'tableHeader'},
 				],				
 				[
-					{text: eqTypes[0],style:'rowHeader'},
-					{text: eqTypes[1],style:'tableHeader'},
-					{text: eqTypes[2],style:'tableHeader'},
-					{text: eqTypes[3],style:'tableHeader'},
-					{text: eqTypes[4],style:'tableHeader'},
-					{text: eqTypes[5],style:'tableHeader'},
-					{text: eqTypes[6],style:'tableHeader'},
-					{text: eqTypes[7],style:'tableHeader'},
-					{text: eqTypes[8],style:'tableHeader'},
+					{text: eq1Types[0],style:'rowHeader'},
+					{text: eq1Types[1],style:'tableHeader'},
+					{text: eq1Types[2],style:'tableHeader'},
+					{text: eq1Types[3],style:'tableHeader'},
+					{text: eq1Types[4],style:'tableHeader'},
+					{text: eq1Types[5],style:'tableHeader'},
+					{text: eq1Types[6],style:'tableHeader'},
+					{text: eq1Types[7],style:'tableHeader'},
+					{text: eq1Types[8],style:'tableHeader'},
 				],				
 			);
 
