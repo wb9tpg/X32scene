@@ -45,11 +45,13 @@ class DocumentDefinition {
 	channelPage ( ) {
 		for (var i=0; i<32; i=i+8) {
 			var w = 42;
-			var tab1 = {style: 'tableExample', table: { widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
-			var tabConfigurations = {style: 'tableExample', table: { widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
-			var tabPreamps = {style: 'tableExample', table: { widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
-			var tabGates = {style: 'tableExample', table: { widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
-			var tabDynamics = {style: 'tableExample', table: { widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
+			var tab1 = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
+			var tabConfigurations = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
+			var tabPreamps = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
+			var tabGates = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
+			var tabDynamics = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
+			var tabInserts = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
+			var tabEqs = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
 			// var tab2 = {style: 'tableExample', table: {headerRows: 2, body: [] }};
 			this.addContent({
 				text: 'Channels',
@@ -91,13 +93,29 @@ class DocumentDefinition {
 
 
 			// Dynamics Section
+			var dynOns  = rowHeader('On / Off');
+			var dynModes = rowHeader('Comp / Exp');
+			var dynDets = rowHeader('Peak / RMS');
+			var dynEnvs = rowHeader('Linear / Log');
+			var dynThrs  = rowHeader('Threshold (dB)');
+			var dynRatios = rowHeader('Ratio');
+			var dynKnees = rowHeader('Knee');
+			var dynMgains = rowHeader('Makeup Gain (dB)')
+			var dynAttacks = rowHeader('Attack (ms)');
+			var dynHolds = rowHeader('Hold (ms)');
+			var dynReleases = rowHeader('Release (ms)');
+			var dynPoss = rowHeader('Pre / Post');
+			var dynKeysrcs = rowHeader('Key Source');
+			var dynMixs	= rowHeader('Mix %');
+			var dynAutos = rowHeader('Auto Time')
+			var dynFilterOns = rowHeader('Filter On/Off');
+			var dynFilterTypes = rowHeader('Filter Type');
+			var dynFilterFreqs = rowHeader('Filter Freq (Hz)');
 
 			
 			// var gates   = rowHeader('Gate Thr(dB)');
 			var inserts = rowHeader('Insert Pre/Post');
-			var dynPos  = rowHeader('Pre/Post')
 			var eqs     = rowHeader('Eq');
-			var dynThrs= rowHeader('Compr Thr(dB)');
 			var mainPans = rowHeader('Main Pan');
 
 
@@ -146,12 +164,28 @@ class DocumentDefinition {
 				gateFilterFreqs.push(cell(gate.filter.f));
 
 
-				// Dynamics
-
+				// dynamics
+				dynOns.push(cell(dyn.on));
+				dynModes.push(cell(dyn.mode));
+				dynDets.push(cell(dyn.det));
+				dynEnvs.push(cell(dyn.env));
+				dynThrs.push(cell(dyn.thr));
+				dynRatios.push(cell(dyn.ratio));
+				dynKnees.push(cell(dyn.knee));
+				dynMgains.push(cell(dyn.mgain));
+				dynAttacks.push(cell(dyn.attack));
+				dynHolds.push(cell(dyn.hold));
+				dynReleases.push(cell(dyn.release));
+				dynPoss.push(cell(dyn.pos));
+				dynKeysrcs.push(cell(dyn.keysrc));
+				dynMixs.push(cell(dyn.mix));
+				dynAutos.push(cell(dyn.auto));
+				dynFilterOns.push(cell(dyn.filter.on));
+				dynFilterTypes.push(cell(dyn.filter.type));
+				dynFilterFreqs.push(cell(dyn.filter.f));
 
 				// gates.push(cell(gate.on, gate.thr));
 				inserts.push(cell(insert.on, insert.pos));
-				dynPos.push(cell(dyn.pos));
 				eqs.push(cell(eq.on));
 				// compThrs.push(cell())
 				dynThrs.push(cell(dyn.on,dyn.thr));
@@ -408,6 +442,213 @@ class DocumentDefinition {
 				[ {text:'Dynamics / Compressor',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
 				// Column Titles	
 				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
+				[
+					{text: dynOns[0],style:'rowHeader'},
+					{text: dynOns[1],style:'tableHeader'},
+					{text: dynOns[2],style:'tableHeader'},
+					{text: dynOns[3],style:'tableHeader'},
+					{text: dynOns[4],style:'tableHeader'},
+					{text: dynOns[5],style:'tableHeader'},
+					{text: dynOns[6],style:'tableHeader'},
+					{text: dynOns[7],style:'tableHeader'},
+					{text: dynOns[8],style:'tableHeader'},
+				],
+				[
+					{text: dynModes[0],style:'rowHeader'},
+					{text: dynModes[1],style:'tableHeader'},
+					{text: dynModes[2],style:'tableHeader'},
+					{text: dynModes[3],style:'tableHeader'},
+					{text: dynModes[4],style:'tableHeader'},
+					{text: dynModes[5],style:'tableHeader'},
+					{text: dynModes[6],style:'tableHeader'},
+					{text: dynModes[7],style:'tableHeader'},
+					{text: dynModes[8],style:'tableHeader'},
+				],
+				[
+					{text: dynDets[0],style:'rowHeader'},
+					{text: dynDets[1],style:'tableHeader'},
+					{text: dynDets[2],style:'tableHeader'},
+					{text: dynDets[3],style:'tableHeader'},
+					{text: dynDets[4],style:'tableHeader'},
+					{text: dynDets[5],style:'tableHeader'},
+					{text: dynDets[6],style:'tableHeader'},
+					{text: dynDets[7],style:'tableHeader'},
+					{text: dynDets[8],style:'tableHeader'},
+				],
+				[
+					{text: dynEnvs[0],style:'rowHeader'},
+					{text: dynEnvs[1],style:'tableHeader'},
+					{text: dynEnvs[2],style:'tableHeader'},
+					{text: dynEnvs[3],style:'tableHeader'},
+					{text: dynEnvs[4],style:'tableHeader'},
+					{text: dynEnvs[5],style:'tableHeader'},
+					{text: dynEnvs[6],style:'tableHeader'},
+					{text: dynEnvs[7],style:'tableHeader'},
+					{text: dynEnvs[8],style:'tableHeader'},
+				],
+				[
+					{text: dynThrs[0],style:'rowHeader'},
+					{text: dynThrs[1],style:'tableHeader'},
+					{text: dynThrs[2],style:'tableHeader'},
+					{text: dynThrs[3],style:'tableHeader'},
+					{text: dynThrs[4],style:'tableHeader'},
+					{text: dynThrs[5],style:'tableHeader'},
+					{text: dynThrs[6],style:'tableHeader'},
+					{text: dynThrs[7],style:'tableHeader'},
+					{text: dynThrs[8],style:'tableHeader'},
+				],
+				[
+					{text: dynRatios[0],style:'rowHeader'},
+					{text: dynRatios[1],style:'tableHeader'},
+					{text: dynRatios[2],style:'tableHeader'},
+					{text: dynRatios[3],style:'tableHeader'},
+					{text: dynRatios[4],style:'tableHeader'},
+					{text: dynRatios[5],style:'tableHeader'},
+					{text: dynRatios[6],style:'tableHeader'},
+					{text: dynRatios[7],style:'tableHeader'},
+					{text: dynRatios[8],style:'tableHeader'},
+				],
+				[
+					{text: dynKnees[0],style:'rowHeader'},
+					{text: dynKnees[1],style:'tableHeader'},
+					{text: dynKnees[2],style:'tableHeader'},
+					{text: dynKnees[3],style:'tableHeader'},
+					{text: dynKnees[4],style:'tableHeader'},
+					{text: dynKnees[5],style:'tableHeader'},
+					{text: dynKnees[6],style:'tableHeader'},
+					{text: dynKnees[7],style:'tableHeader'},
+					{text: dynKnees[8],style:'tableHeader'},
+				],
+				[
+					{text: dynMgains[0],style:'rowHeader'},
+					{text: dynMgains[1],style:'tableHeader'},
+					{text: dynMgains[2],style:'tableHeader'},
+					{text: dynMgains[3],style:'tableHeader'},
+					{text: dynMgains[4],style:'tableHeader'},
+					{text: dynMgains[5],style:'tableHeader'},
+					{text: dynMgains[6],style:'tableHeader'},
+					{text: dynMgains[7],style:'tableHeader'},
+					{text: dynMgains[8],style:'tableHeader'},
+				],
+				[
+					{text: dynAttacks[0],style:'rowHeader'},
+					{text: dynAttacks[1],style:'tableHeader'},
+					{text: dynAttacks[2],style:'tableHeader'},
+					{text: dynAttacks[3],style:'tableHeader'},
+					{text: dynAttacks[4],style:'tableHeader'},
+					{text: dynAttacks[5],style:'tableHeader'},
+					{text: dynAttacks[6],style:'tableHeader'},
+					{text: dynAttacks[7],style:'tableHeader'},
+					{text: dynAttacks[8],style:'tableHeader'},
+				],
+				[
+					{text: dynHolds[0],style:'rowHeader'},
+					{text: dynHolds[1],style:'tableHeader'},
+					{text: dynHolds[2],style:'tableHeader'},
+					{text: dynHolds[3],style:'tableHeader'},
+					{text: dynHolds[4],style:'tableHeader'},
+					{text: dynHolds[5],style:'tableHeader'},
+					{text: dynHolds[6],style:'tableHeader'},
+					{text: dynHolds[7],style:'tableHeader'},
+					{text: dynHolds[8],style:'tableHeader'},
+				],
+				[
+					{text: dynReleases[0],style:'rowHeader'},
+					{text: dynReleases[1],style:'tableHeader'},
+					{text: dynReleases[2],style:'tableHeader'},
+					{text: dynReleases[3],style:'tableHeader'},
+					{text: dynReleases[4],style:'tableHeader'},
+					{text: dynReleases[5],style:'tableHeader'},
+					{text: dynReleases[6],style:'tableHeader'},
+					{text: dynReleases[7],style:'tableHeader'},
+					{text: dynReleases[8],style:'tableHeader'},
+				],
+				[
+					{text: dynPoss[0],style:'rowHeader'},
+					{text: dynPoss[1],style:'tableHeader'},
+					{text: dynPoss[2],style:'tableHeader'},
+					{text: dynPoss[3],style:'tableHeader'},
+					{text: dynPoss[4],style:'tableHeader'},
+					{text: dynPoss[5],style:'tableHeader'},
+					{text: dynPoss[6],style:'tableHeader'},
+					{text: dynPoss[7],style:'tableHeader'},
+					{text: dynPoss[8],style:'tableHeader'},
+				],
+				[
+					{text: dynKeysrcs[0],style:'rowHeader'},
+					{text: dynKeysrcs[1],style:'tableHeader'},
+					{text: dynKeysrcs[2],style:'tableHeader'},
+					{text: dynKeysrcs[3],style:'tableHeader'},
+					{text: dynKeysrcs[4],style:'tableHeader'},
+					{text: dynKeysrcs[5],style:'tableHeader'},
+					{text: dynKeysrcs[6],style:'tableHeader'},
+					{text: dynKeysrcs[7],style:'tableHeader'},
+					{text: dynKeysrcs[8],style:'tableHeader'},
+				],
+				[
+					{text: dynMixs[0],style:'rowHeader'},
+					{text: dynMixs[1],style:'tableHeader'},
+					{text: dynMixs[2],style:'tableHeader'},
+					{text: dynMixs[3],style:'tableHeader'},
+					{text: dynMixs[4],style:'tableHeader'},
+					{text: dynMixs[5],style:'tableHeader'},
+					{text: dynMixs[6],style:'tableHeader'},
+					{text: dynMixs[7],style:'tableHeader'},
+					{text: dynMixs[8],style:'tableHeader'},
+				],
+				[
+					{text: dynAutos[0],style:'rowHeader'},
+					{text: dynAutos[1],style:'tableHeader'},
+					{text: dynAutos[2],style:'tableHeader'},
+					{text: dynAutos[3],style:'tableHeader'},
+					{text: dynAutos[4],style:'tableHeader'},
+					{text: dynAutos[5],style:'tableHeader'},
+					{text: dynAutos[6],style:'tableHeader'},
+					{text: dynAutos[7],style:'tableHeader'},
+					{text: dynAutos[8],style:'tableHeader'},
+				],
+				[
+					{text: dynFilterOns[0],style:'rowHeader'},
+					{text: dynFilterOns[1],style:'tableHeader'},
+					{text: dynFilterOns[2],style:'tableHeader'},
+					{text: dynFilterOns[3],style:'tableHeader'},
+					{text: dynFilterOns[4],style:'tableHeader'},
+					{text: dynFilterOns[5],style:'tableHeader'},
+					{text: dynFilterOns[6],style:'tableHeader'},
+					{text: dynFilterOns[7],style:'tableHeader'},
+					{text: dynFilterOns[8],style:'tableHeader'},
+				],
+				[
+					{text: dynFilterTypes[0],style:'rowHeader'},
+					{text: dynFilterTypes[1],style:'tableHeader'},
+					{text: dynFilterTypes[2],style:'tableHeader'},
+					{text: dynFilterTypes[3],style:'tableHeader'},
+					{text: dynFilterTypes[4],style:'tableHeader'},
+					{text: dynFilterTypes[5],style:'tableHeader'},
+					{text: dynFilterTypes[6],style:'tableHeader'},
+					{text: dynFilterTypes[7],style:'tableHeader'},
+					{text: dynFilterTypes[8],style:'tableHeader'},
+				],
+				[
+					{text: dynFilterFreqs[0],style:'rowHeader'},
+					{text: dynFilterFreqs[1],style:'tableHeader'},
+					{text: dynFilterFreqs[2],style:'tableHeader'},
+					{text: dynFilterFreqs[3],style:'tableHeader'},
+					{text: dynFilterFreqs[4],style:'tableHeader'},
+					{text: dynFilterFreqs[5],style:'tableHeader'},
+					{text: dynFilterFreqs[6],style:'tableHeader'},
+					{text: dynFilterFreqs[7],style:'tableHeader'},
+					{text: dynFilterFreqs[8],style:'tableHeader'},
+				],
+
+				// dynKeysrcs.push(cell(dyn.keysrc));
+				// dynMixs.push(cell(dyn.mix));
+				// dynAutos.push(cell(dyn.auto));
+				// dynFilterOns.push(cell(dyn.filter.on));
+				// dynFilterTypes.push(cell(dyn.filter.type));
+				// dynFilterFreqs.push(cell(dyn.filter.f));
+
+
 			);
 			this.addContent(tabDynamics);			
 
@@ -421,9 +662,7 @@ class DocumentDefinition {
 
 
 				inserts,
-				dynPos,
 				eqs,
-				dynThrs,
 				mainPans,
 
 

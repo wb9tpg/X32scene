@@ -410,11 +410,15 @@ class X32 {
 			}
 			for (var i = 0; i < labels.length; i++) {
 				var argIndex = (i+1).toString();
-				this[c0][c1][c2][labels[i]] = this.arg[argIndex];
+				if (labels[i]=='keysrc') {
+					this[c0][c1][c2][labels[i]] = toSource(this.arg[argIndex]);
+				} else {
+					this[c0][c1][c2][labels[i]] = this.arg[argIndex];
+				}
 			}
 		} else if (c2 == 'dyn' && c3 == 'filter') {
 			// winston.debug(this.line);
-			var labels = ['on','type','frequency'];
+			var labels = ['on','type','f'];
 			for (var i = 0; i < labels.length; i++) {
 				var argIndex = (i+1).toString();
 				this[c0][c1][c2][c3][labels[i]] = this.arg[argIndex];
