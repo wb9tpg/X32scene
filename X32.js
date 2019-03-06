@@ -54,10 +54,11 @@ var styles = {
 	},
 	tableCell: {
 		bold: false,
-		fontSize: 11,
+		fontSize: 10,
 		color: 'black',
 		alignment: 'center'
 	},
+	sym: { fontName: 'symbol'},
 	tableSpan: {
 		bold: false,
 		fontSize: 10,

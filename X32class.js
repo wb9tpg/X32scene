@@ -679,21 +679,37 @@ function toSource(c) {
 
 function dcaBitmap(bitmap) {
 	var dca = {};
+	var s = '';
 	dca.bitmap = bitmap;
 	for (var i=1; i <= 8; i++) {
 		var c = bitmap.charAt(9-i);
-		if (c == '1') dca[i] = 'ON'; else dca[i] = 'OFF';
+		if (c == '1') {
+			dca[i] = 'ON';
+			var is = i.toString();
+			s = (s.length == 0) ? s.concat(is) : ',' +s.concat(is);
+		} else {
+			dca[i] = 'OFF'
+		};
 	} 
+	dca.str = (s.length == 0) ? 'None' : s; 
 	return dca;
 }
 
 function muteBitmap(bitmap) {
 	var mute = {};
+	var s = '';
 	mute.bitmap = bitmap;
 	for (var i=1; i <= 6; i++) {
 		var c = bitmap.charAt(7-i);
-		if (c == '1') mute[i] = 'ON'; else mute[i] = 'OFF';
+		if (c == '1') {
+			var is = i.toString();
+			s = (s.length == 0) ? s.concat(is) : ',' +s.concat(is);
+			mute[i] = 'ON';
+		} else {
+			mute[i] = 'OFF';
+		}
 	} 
+	mute.str = (s.length == 0) ? 'None' : s; 
 	return mute;
 }
 

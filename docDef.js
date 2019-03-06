@@ -3,6 +3,7 @@ var moment = require('moment');
 
 var Off = 'Off';
 var On = 'On';
+var Blank = ' ';
 
 class DocumentDefinition {
 
@@ -48,10 +49,10 @@ class DocumentDefinition {
 			var tabConfigurations = {pageBreak: 'before',style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
 			var tabPreamps = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
 			var tabGates = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
-			var tabDynamics = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
+			var tabDynamics = {pageBreak: 'before',style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
 			var tabInserts = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
 			var tabEqs = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
-			var tabMixs = {style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
+			var tabMixs = {pageBreak: 'before',style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
 
 			var chN = [(i+1).pad(),(i+2).pad(),(i+3).pad(),(i+4).pad(),
 			           (i+5).pad(),(i+6).pad(),(i+7).pad(),(i+8).pad()];
@@ -67,11 +68,14 @@ class DocumentDefinition {
 			var ports   = rowHeader('Source');
 			var delays  = rowHeader('Delay');
 			var links   = rowHeader('Linked');
+			var dcas    = rowHeader('DCA');
+			var mutes   = rowHeader('Mute Groups');
+			var automixs= rowHeader('Automix');
 
 			// Preamp Section
 			var trims   = rowHeader('Trim (dB)');
 			var inverts = rowHeader('Reverse / Invert');
-			var lowcuts = rowHeader('Low Cut');
+			var lowcuts = rowHeader('Low Cut (Hz)');
 
 			// Gate Section
 			var gateOns  = rowHeader('On / Off');
@@ -132,27 +136,27 @@ class DocumentDefinition {
 
 			// Mix
 			var mixEnableds		= rowHeader('Hard Mute');
-			var mixFaders		= rowHeader('Fader');
+			var mixFaders		= rowHeader('Fader (dB)');
 			var mixLRons		= rowHeader('LR Bus On / Off');
 			var mixLRpans		= rowHeader('LR Pan');
 			var mixMONOons		= rowHeader('Mono Bus On/Off');
-			var mixMONOlevels   = rowHeader('Mono Bus Level');
-			var mixBus01ons		= rowHeader('Bus 01 On/Off');
-			var mixBus02ons		= rowHeader('Bus 02 On/Off');
-			var mixBus03ons		= rowHeader('Bus 03 On/Off');
-			var mixBus04ons		= rowHeader('Bus 04 On/Off');
-			var mixBus05ons		= rowHeader('Bus 05 On/Off');
-			var mixBus06ons		= rowHeader('Bus 06 On/Off');
-			var mixBus07ons		= rowHeader('Bus 07 On/Off');
-			var mixBus08ons		= rowHeader('Bus 08 On/Off');
-			var mixBus09ons		= rowHeader('Bus 09 On/Off');
-			var mixBus10ons		= rowHeader('Bus 10 On/Off');
-			var mixBus11ons		= rowHeader('Bus 11 On/Off');
-			var mixBus12ons		= rowHeader('Bus 12 On/Off');
-			var mixBus13ons		= rowHeader('Bus 13 On/Off');
-			var mixBus14ons		= rowHeader('Bus 14 On/Off');
-			var mixBus15ons		= rowHeader('Bus 15 On/Off');
-			var mixBus16ons		= rowHeader('Bus 16 On/Off');
+			var mixMONOlevels   = rowHeader('Mono Level (dB)');
+			var mixBus01ons		= rowHeader('Bus 01 On / Off');
+			var mixBus02ons		= rowHeader('Bus 02 On / Off');
+			var mixBus03ons		= rowHeader('Bus 03 On / Off');
+			var mixBus04ons		= rowHeader('Bus 04 On / Off');
+			var mixBus05ons		= rowHeader('Bus 05 On / Off');
+			var mixBus06ons		= rowHeader('Bus 06 On / Off');
+			var mixBus07ons		= rowHeader('Bus 07 On / Off');
+			var mixBus08ons		= rowHeader('Bus 08 On / Off');
+			var mixBus09ons		= rowHeader('Bus 09 On / Off');
+			var mixBus10ons		= rowHeader('Bus 10 On / Off');
+			var mixBus11ons		= rowHeader('Bus 11 On / Off');
+			var mixBus12ons		= rowHeader('Bus 12 On / Off');
+			var mixBus13ons		= rowHeader('Bus 13 On / Off');
+			var mixBus14ons		= rowHeader('Bus 14 On / Off');
+			var mixBus15ons		= rowHeader('Bus 15 On / Off');
+			var mixBus16ons		= rowHeader('Bus 16 On / Off');
 			var mixBus01levels	= rowHeader('Bus 01 Level (dB)');
 			var mixBus02levels	= rowHeader('Bus 02 Level (dB)');
 			var mixBus03levels	= rowHeader('Bus 03 Level (dB)');
@@ -169,6 +173,22 @@ class DocumentDefinition {
 			var mixBus14levels	= rowHeader('Bus 14 Level (dB)');
 			var mixBus15levels	= rowHeader('Bus 15 Level (dB)');
 			var mixBus16levels	= rowHeader('Bus 16 Level (dB)');
+			var mixBus01pans  = rowHeader('Bus 01 / 02 Pan (dB)');
+			var mixBus03pans  = rowHeader('Bus 01 / 02 Pan (dB)');
+			var mixBus05pans  = rowHeader('Bus 01 / 02 Pan (dB)');
+			var mixBus07pans  = rowHeader('Bus 01 / 02 Pan (dB)');
+			var mixBus09pans  = rowHeader('Bus 01 / 02 Pan (dB)');
+			var mixBus11pans  = rowHeader('Bus 01 / 02 Pan (dB)');
+			var mixBus13pans  = rowHeader('Bus 01 / 02 Pan (dB)');
+			var mixBus15pans  = rowHeader('Bus 01 / 02 Pan (dB)');
+			var mixBus01types  = rowHeader('Bus 01 / 02 Type');
+			var mixBus03types  = rowHeader('Bus 01 / 02 Type');
+			var mixBus05types  = rowHeader('Bus 01 / 02 Type');
+			var mixBus07types  = rowHeader('Bus 01 / 02 Type');
+			var mixBus09types  = rowHeader('Bus 01 / 02 Type');
+			var mixBus11types  = rowHeader('Bus 01 / 02 Type');
+			var mixBus13types  = rowHeader('Bus 01 / 02 Type');
+			var mixBus15types  = rowHeader('Bus 01 / 02 Type');
 
 
 			for (var j=0; j<8; j++) {
@@ -187,6 +207,7 @@ class DocumentDefinition {
 				var source = this.x32['ch'][chN[j]]['config']['source']; 
 
 
+
 				IDs.push('Ch'+chId);
 				ChIds.push({text: 'Ch'+chId});
 				
@@ -196,11 +217,16 @@ class DocumentDefinition {
 				ports.push({text: (config.source=='OFF')? Off : this.x32['config']['routing']['ports'][source], style: 'tableCell'});
 				delays.push(cell(delay.on, delay.time));
 				links.push((typeof config['linked'] === 'undefined') ? {} : {text: ((config.linked=='ON')?On:Off), style:'tableCell', colSpan:2 } );
+				dcas.push(cell(grp.dca.str));
+				mutes.push(cell(grp.mute.str));
+				automixs.push(cell(
+					(autoMix.group == 'OFF') ? Off : (autoMix.group+': '+autoMix.weight)
+				)); 
 
 				// Preamp
 				trims.push(cell(preamp.trim));
 				inverts.push(cell(preamp.invert));
-				lowcuts.push(cell(preamp.hpon, preamp.hpf+'Hz'));
+				lowcuts.push(cell(preamp.hpon, freq(preamp.hpf)));
 
 				// gate
 				gateOns.push(cell(gate.on));
@@ -213,7 +239,7 @@ class DocumentDefinition {
 				gateKeysrcs.push(cell(gate.keysrc));
 				gateFilterOns.push(cell(gate.filter.on));
 				gateFilterTypes.push(cell(gate.filter.type));
-				gateFilterFreqs.push(cell(gate.filter.f));
+				gateFilterFreqs.push(cell(freq(gate.filter.f)));
 
 				// dynamics
 				dynOns.push(cell(dyn.on));
@@ -233,7 +259,7 @@ class DocumentDefinition {
 				dynAutos.push(cell(dyn.auto));
 				dynFilterOns.push(cell(dyn.filter.on));
 				dynFilterTypes.push(cell(dyn.filter.type));
-				dynFilterFreqs.push(cell(dyn.filter.f));
+				dynFilterFreqs.push(cell(freq(dyn.filter.f)));
 
 				// Inserts
 				insOns.push(cell(insert.on));
@@ -243,19 +269,19 @@ class DocumentDefinition {
 				// gates.push(cell(gate.on, gate.thr));
 				eqOns.push(cell(eq.on));
 				eq1Types.push(cell(eq['1']['type']));
-				eq1Fs.push(   cell(eq['1']['f']));
+				eq1Fs.push(   cell(freq(eq['1']['f'])));
 				eq1Gs.push(   cell(eq['1']['g']));
 				eq1Qs.push(   cell(eq['1']['q']));
 				eq2Types.push(cell(eq['2']['type']));
-				eq2Fs.push(   cell(eq['2']['f']));
+				eq2Fs.push(   cell(freq(eq['2']['f'])));
 				eq2Gs.push(   cell(eq['2']['g']));
 				eq2Qs.push(   cell(eq['2']['q']));
 				eq3Types.push(cell(eq['3']['type']));
-				eq3Fs.push(   cell(eq['3']['f']));
+				eq3Fs.push(   cell(freq(eq['3']['f'])));
 				eq3Gs.push(   cell(eq['3']['g']));
 				eq3Qs.push(   cell(eq['3']['q']));
 				eq4Types.push(cell(eq['4']['type']));
-				eq4Fs.push(   cell(eq['4']['f']));
+				eq4Fs.push(cell(freq(eq['4']['f'])));
 				eq4Gs.push(   cell(eq['4']['g']));
 				eq4Qs.push(   cell(eq['4']['q']));
 
@@ -299,6 +325,22 @@ class DocumentDefinition {
 				mixBus14levels.push(cell(mix['14']['level']));
 				mixBus15levels.push(cell(mix['15']['level']));
 				mixBus16levels.push(cell(mix['16']['level']));
+				mixBus01types.push(cell(mix['01']['type']));
+				mixBus03types.push(cell(mix['03']['type']));
+				mixBus05types.push(cell(mix['05']['type']));
+				mixBus07types.push(cell(mix['07']['type']));
+				mixBus09types.push(cell(mix['09']['type']));
+				mixBus11types.push(cell(mix['11']['type']));
+				mixBus13types.push(cell(mix['13']['type']));
+				mixBus15types.push(cell(mix['15']['type']));
+				mixBus01pans.push(cell(mix['01']['pan']));
+				mixBus03pans.push(cell(mix['03']['pan']));
+				mixBus05pans.push(cell(mix['05']['pan']));
+				mixBus07pans.push(cell(mix['07']['pan']));
+				mixBus09pans.push(cell(mix['09']['pan']));
+				mixBus11pans.push(cell(mix['11']['pan']));
+				mixBus13pans.push(cell(mix['13']['pan']));
+				mixBus15pans.push(cell(mix['15']['pan']));
 			
 			}
 
@@ -381,6 +423,17 @@ class DocumentDefinition {
 					{text: mixEnableds[8],style:'tableHeader'},
 				],	
 				[
+					{text: mutes[0],style:'rowHeader'},
+					{text: mutes[1],style:'tableHeader'},
+					{text: mutes[2],style:'tableHeader'},
+					{text: mutes[3],style:'tableHeader'},
+					{text: mutes[4],style:'tableHeader'},
+					{text: mutes[5],style:'tableHeader'},
+					{text: mutes[6],style:'tableHeader'},
+					{text: mutes[7],style:'tableHeader'},
+					{text: mutes[8],style:'tableHeader'},
+				],			
+				[
 					{text: mixFaders[0],style:'rowHeader'},
 					{text: mixFaders[1],style:'tableHeader'},
 					{text: mixFaders[2],style:'tableHeader'},
@@ -391,6 +444,72 @@ class DocumentDefinition {
 					{text: mixFaders[7],style:'tableHeader'},
 					{text: mixFaders[8],style:'tableHeader'},
 				],	
+				[
+					{text: mixLRons[0],style:'rowHeader'},
+					{text: mixLRons[1],style:'tableHeader'},
+					{text: mixLRons[2],style:'tableHeader'},
+					{text: mixLRons[3],style:'tableHeader'},
+					{text: mixLRons[4],style:'tableHeader'},
+					{text: mixLRons[5],style:'tableHeader'},
+					{text: mixLRons[6],style:'tableHeader'},
+					{text: mixLRons[7],style:'tableHeader'},
+					{text: mixLRons[8],style:'tableHeader'},
+				],	
+				[
+					{text: mixLRpans[0],style:'rowHeader'},
+					{text: mixLRpans[1],style:'tableHeader'},
+					{text: mixLRpans[2],style:'tableHeader'},
+					{text: mixLRpans[3],style:'tableHeader'},
+					{text: mixLRpans[4],style:'tableHeader'},
+					{text: mixLRpans[5],style:'tableHeader'},
+					{text: mixLRpans[6],style:'tableHeader'},
+					{text: mixLRpans[7],style:'tableHeader'},
+					{text: mixLRpans[8],style:'tableHeader'},
+				],
+				[
+					{text: mixMONOons[0],style:'rowHeader'},
+					{text: mixMONOons[1],style:'tableHeader'},
+					{text: mixMONOons[2],style:'tableHeader'},
+					{text: mixMONOons[3],style:'tableHeader'},
+					{text: mixMONOons[4],style:'tableHeader'},
+					{text: mixMONOons[5],style:'tableHeader'},
+					{text: mixMONOons[6],style:'tableHeader'},
+					{text: mixMONOons[7],style:'tableHeader'},
+					{text: mixMONOons[8],style:'tableHeader'},
+				],			
+				[
+					{text: mixMONOlevels[0],style:'rowHeader'},
+					{text: mixMONOlevels[1],style:'tableHeader'},
+					{text: mixMONOlevels[2],style:'tableHeader'},
+					{text: mixMONOlevels[3],style:'tableHeader'},
+					{text: mixMONOlevels[4],style:'tableHeader'},
+					{text: mixMONOlevels[5],style:'tableHeader'},
+					{text: mixMONOlevels[6],style:'tableHeader'},
+					{text: mixMONOlevels[7],style:'tableHeader'},
+					{text: mixMONOlevels[8],style:'tableHeader'},
+				],			
+				[
+					{text: dcas[0],style:'rowHeader'},
+					{text: dcas[1],style:'tableHeader'},
+					{text: dcas[2],style:'tableHeader'},
+					{text: dcas[3],style:'tableHeader'},
+					{text: dcas[4],style:'tableHeader'},
+					{text: dcas[5],style:'tableHeader'},
+					{text: dcas[6],style:'tableHeader'},
+					{text: dcas[7],style:'tableHeader'},
+					{text: dcas[8],style:'tableHeader'},
+				],			
+				[
+					{text: automixs[0],style:'rowHeader'},
+					{text: automixs[1],style:'tableHeader'},
+					{text: automixs[2],style:'tableHeader'},
+					{text: automixs[3],style:'tableHeader'},
+					{text: automixs[4],style:'tableHeader'},
+					{text: automixs[5],style:'tableHeader'},
+					{text: automixs[6],style:'tableHeader'},
+					{text: automixs[7],style:'tableHeader'},
+					{text: automixs[8],style:'tableHeader'},
+				],			
 
 			);
 
@@ -1004,45 +1123,31 @@ class DocumentDefinition {
 
 			tabMixs.table.body.push(
 				// Inserts Header
-				[ {text:'LR & Mono Bus Sends',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
+				[ {text:'Mix Bus Sends',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
 				// Column Titles	
 				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
 				[
-					{text: mixLRons[0],style:'rowHeader'},
-					{text: mixLRons[1],style:'tableHeader'},
-					{text: mixLRons[2],style:'tableHeader'},
-					{text: mixLRons[3],style:'tableHeader'},
-					{text: mixLRons[4],style:'tableHeader'},
-					{text: mixLRons[5],style:'tableHeader'},
-					{text: mixLRons[6],style:'tableHeader'},
-					{text: mixLRons[7],style:'tableHeader'},
-					{text: mixLRons[8],style:'tableHeader'},
-				],	
-				[
-					{text: mixLRpans[0],style:'rowHeader'},
-					{text: mixLRpans[1],style:'tableHeader'},
-					{text: mixLRpans[2],style:'tableHeader'},
-					{text: mixLRpans[3],style:'tableHeader'},
-					{text: mixLRpans[4],style:'tableHeader'},
-					{text: mixLRpans[5],style:'tableHeader'},
-					{text: mixLRpans[6],style:'tableHeader'},
-					{text: mixLRpans[7],style:'tableHeader'},
-					{text: mixLRpans[8],style:'tableHeader'},
+					{text: mixBus01types[0],style:'rowHeader'},
+					{text: mixBus01types[1],style:'tableHeader'},
+					{text: mixBus01types[2],style:'tableHeader'},
+					{text: mixBus01types[3],style:'tableHeader'},
+					{text: mixBus01types[4],style:'tableHeader'},
+					{text: mixBus01types[5],style:'tableHeader'},
+					{text: mixBus01types[6],style:'tableHeader'},
+					{text: mixBus01types[7],style:'tableHeader'},
+					{text: mixBus01types[8],style:'tableHeader'},
 				],
-
-// mixMONOons.pus
-// mixMONOlevels.			
 				[
-					{text: mixMONOons[0],style:'rowHeader'},
-					{text: mixMONOons[1],style:'tableHeader'},
-					{text: mixMONOons[2],style:'tableHeader'},
-					{text: mixMONOons[3],style:'tableHeader'},
-					{text: mixMONOons[4],style:'tableHeader'},
-					{text: mixMONOons[5],style:'tableHeader'},
-					{text: mixMONOons[6],style:'tableHeader'},
-					{text: mixMONOons[7],style:'tableHeader'},
-					{text: mixMONOons[8],style:'tableHeader'},
-				],			
+					{text: mixBus01pans[0],style:'rowHeader'},
+					{text: mixBus01pans[1],style:'tableHeader'},
+					{text: mixBus01pans[2],style:'tableHeader'},
+					{text: mixBus01pans[3],style:'tableHeader'},
+					{text: mixBus01pans[4],style:'tableHeader'},
+					{text: mixBus01pans[5],style:'tableHeader'},
+					{text: mixBus01pans[6],style:'tableHeader'},
+					{text: mixBus01pans[7],style:'tableHeader'},
+					{text: mixBus01pans[8],style:'tableHeader'},
+				],
 				[
 					{text: mixBus01ons[0],style:'rowHeader'},
 					{text: mixBus01ons[1],style:'tableHeader'},
@@ -1088,6 +1193,28 @@ class DocumentDefinition {
 					{text: mixBus02levels[8],style:'tableHeader'},
 				],	
 				[
+					{text: mixBus03types[0],style:'rowHeader'},
+					{text: mixBus03types[1],style:'tableHeader'},
+					{text: mixBus03types[2],style:'tableHeader'},
+					{text: mixBus03types[3],style:'tableHeader'},
+					{text: mixBus03types[4],style:'tableHeader'},
+					{text: mixBus03types[5],style:'tableHeader'},
+					{text: mixBus03types[6],style:'tableHeader'},
+					{text: mixBus03types[7],style:'tableHeader'},
+					{text: mixBus03types[8],style:'tableHeader'},
+				],
+				[
+					{text: mixBus03pans[0],style:'rowHeader'},
+					{text: mixBus03pans[1],style:'tableHeader'},
+					{text: mixBus03pans[2],style:'tableHeader'},
+					{text: mixBus03pans[3],style:'tableHeader'},
+					{text: mixBus03pans[4],style:'tableHeader'},
+					{text: mixBus03pans[5],style:'tableHeader'},
+					{text: mixBus03pans[6],style:'tableHeader'},
+					{text: mixBus03pans[7],style:'tableHeader'},
+					{text: mixBus03pans[8],style:'tableHeader'},
+				],
+				[
 					{text: mixBus03ons[0],style:'rowHeader'},
 					{text: mixBus03ons[1],style:'tableHeader'},
 					{text: mixBus03ons[2],style:'tableHeader'},
@@ -1131,6 +1258,28 @@ class DocumentDefinition {
 					{text: mixBus04levels[7],style:'tableHeader'},
 					{text: mixBus04levels[8],style:'tableHeader'},
 				],	
+				[
+					{text: mixBus05types[0],style:'rowHeader'},
+					{text: mixBus05types[1],style:'tableHeader'},
+					{text: mixBus05types[2],style:'tableHeader'},
+					{text: mixBus05types[3],style:'tableHeader'},
+					{text: mixBus05types[4],style:'tableHeader'},
+					{text: mixBus05types[5],style:'tableHeader'},
+					{text: mixBus05types[6],style:'tableHeader'},
+					{text: mixBus05types[7],style:'tableHeader'},
+					{text: mixBus05types[8],style:'tableHeader'},
+				],
+				[
+					{text: mixBus05pans[0],style:'rowHeader'},
+					{text: mixBus05pans[1],style:'tableHeader'},
+					{text: mixBus05pans[2],style:'tableHeader'},
+					{text: mixBus05pans[3],style:'tableHeader'},
+					{text: mixBus05pans[4],style:'tableHeader'},
+					{text: mixBus05pans[5],style:'tableHeader'},
+					{text: mixBus05pans[6],style:'tableHeader'},
+					{text: mixBus05pans[7],style:'tableHeader'},
+					{text: mixBus05pans[8],style:'tableHeader'},
+				],
 				[
 					{text: mixBus05ons[0],style:'rowHeader'},
 					{text: mixBus05ons[1],style:'tableHeader'},
@@ -1176,6 +1325,28 @@ class DocumentDefinition {
 					{text: mixBus06levels[8],style:'tableHeader'},
 				],	
 				[
+					{text: mixBus07types[0],style:'rowHeader'},
+					{text: mixBus07types[1],style:'tableHeader'},
+					{text: mixBus07types[2],style:'tableHeader'},
+					{text: mixBus07types[3],style:'tableHeader'},
+					{text: mixBus07types[4],style:'tableHeader'},
+					{text: mixBus07types[5],style:'tableHeader'},
+					{text: mixBus07types[6],style:'tableHeader'},
+					{text: mixBus07types[7],style:'tableHeader'},
+					{text: mixBus07types[8],style:'tableHeader'},
+				],
+				[
+					{text: mixBus07pans[0],style:'rowHeader'},
+					{text: mixBus07pans[1],style:'tableHeader'},
+					{text: mixBus07pans[2],style:'tableHeader'},
+					{text: mixBus07pans[3],style:'tableHeader'},
+					{text: mixBus07pans[4],style:'tableHeader'},
+					{text: mixBus07pans[5],style:'tableHeader'},
+					{text: mixBus07pans[6],style:'tableHeader'},
+					{text: mixBus07pans[7],style:'tableHeader'},
+					{text: mixBus07pans[8],style:'tableHeader'},
+				],
+				[
 					{text: mixBus07ons[0],style:'rowHeader'},
 					{text: mixBus07ons[1],style:'tableHeader'},
 					{text: mixBus07ons[2],style:'tableHeader'},
@@ -1219,6 +1390,28 @@ class DocumentDefinition {
 					{text: mixBus08levels[7],style:'tableHeader'},
 					{text: mixBus08levels[8],style:'tableHeader'},
 				],	
+				[
+					{text: mixBus09types[0],style:'rowHeader'},
+					{text: mixBus09types[1],style:'tableHeader'},
+					{text: mixBus09types[2],style:'tableHeader'},
+					{text: mixBus09types[3],style:'tableHeader'},
+					{text: mixBus09types[4],style:'tableHeader'},
+					{text: mixBus09types[5],style:'tableHeader'},
+					{text: mixBus09types[6],style:'tableHeader'},
+					{text: mixBus09types[7],style:'tableHeader'},
+					{text: mixBus09types[8],style:'tableHeader'},
+				],
+				[
+					{text: mixBus09pans[0],style:'rowHeader'},
+					{text: mixBus09pans[1],style:'tableHeader'},
+					{text: mixBus09pans[2],style:'tableHeader'},
+					{text: mixBus09pans[3],style:'tableHeader'},
+					{text: mixBus09pans[4],style:'tableHeader'},
+					{text: mixBus09pans[5],style:'tableHeader'},
+					{text: mixBus09pans[6],style:'tableHeader'},
+					{text: mixBus09pans[7],style:'tableHeader'},
+					{text: mixBus09pans[8],style:'tableHeader'},
+				],
 				[
 					{text: mixBus09ons[0],style:'rowHeader'},
 					{text: mixBus09ons[1],style:'tableHeader'},
@@ -1264,6 +1457,28 @@ class DocumentDefinition {
 					{text: mixBus10levels[8],style:'tableHeader'},
 				],	
 				[
+					{text: mixBus11types[0],style:'rowHeader'},
+					{text: mixBus11types[1],style:'tableHeader'},
+					{text: mixBus11types[2],style:'tableHeader'},
+					{text: mixBus11types[3],style:'tableHeader'},
+					{text: mixBus11types[4],style:'tableHeader'},
+					{text: mixBus11types[5],style:'tableHeader'},
+					{text: mixBus11types[6],style:'tableHeader'},
+					{text: mixBus11types[7],style:'tableHeader'},
+					{text: mixBus11types[8],style:'tableHeader'},
+				],
+				[
+					{text: mixBus11pans[0],style:'rowHeader'},
+					{text: mixBus11pans[1],style:'tableHeader'},
+					{text: mixBus11pans[2],style:'tableHeader'},
+					{text: mixBus11pans[3],style:'tableHeader'},
+					{text: mixBus11pans[4],style:'tableHeader'},
+					{text: mixBus11pans[5],style:'tableHeader'},
+					{text: mixBus11pans[6],style:'tableHeader'},
+					{text: mixBus11pans[7],style:'tableHeader'},
+					{text: mixBus11pans[8],style:'tableHeader'},
+				],
+				[
 					{text: mixBus11ons[0],style:'rowHeader'},
 					{text: mixBus11ons[1],style:'tableHeader'},
 					{text: mixBus11ons[2],style:'tableHeader'},
@@ -1308,6 +1523,28 @@ class DocumentDefinition {
 					{text: mixBus12levels[8],style:'tableHeader'},
 				],	
 				[
+					{text: mixBus13types[0],style:'rowHeader'},
+					{text: mixBus13types[1],style:'tableHeader'},
+					{text: mixBus13types[2],style:'tableHeader'},
+					{text: mixBus13types[3],style:'tableHeader'},
+					{text: mixBus13types[4],style:'tableHeader'},
+					{text: mixBus13types[5],style:'tableHeader'},
+					{text: mixBus13types[6],style:'tableHeader'},
+					{text: mixBus13types[7],style:'tableHeader'},
+					{text: mixBus13types[8],style:'tableHeader'},
+				],
+				[
+					{text: mixBus13pans[0],style:'rowHeader'},
+					{text: mixBus13pans[1],style:'tableHeader'},
+					{text: mixBus13pans[2],style:'tableHeader'},
+					{text: mixBus13pans[3],style:'tableHeader'},
+					{text: mixBus13pans[4],style:'tableHeader'},
+					{text: mixBus13pans[5],style:'tableHeader'},
+					{text: mixBus13pans[6],style:'tableHeader'},
+					{text: mixBus13pans[7],style:'tableHeader'},
+					{text: mixBus13pans[8],style:'tableHeader'},
+				],
+				[
 					{text: mixBus13ons[0],style:'rowHeader'},
 					{text: mixBus13ons[1],style:'tableHeader'},
 					{text: mixBus13ons[2],style:'tableHeader'},
@@ -1351,6 +1588,28 @@ class DocumentDefinition {
 					{text: mixBus14levels[7],style:'tableHeader'},
 					{text: mixBus14levels[8],style:'tableHeader'},
 				],	
+				[
+					{text: mixBus15types[0],style:'rowHeader'},
+					{text: mixBus15types[1],style:'tableHeader'},
+					{text: mixBus15types[2],style:'tableHeader'},
+					{text: mixBus15types[3],style:'tableHeader'},
+					{text: mixBus15types[4],style:'tableHeader'},
+					{text: mixBus15types[5],style:'tableHeader'},
+					{text: mixBus15types[6],style:'tableHeader'},
+					{text: mixBus15types[7],style:'tableHeader'},
+					{text: mixBus15types[8],style:'tableHeader'},
+				],
+				[
+					{text: mixBus15pans[0],style:'rowHeader'},
+					{text: mixBus15pans[1],style:'tableHeader'},
+					{text: mixBus15pans[2],style:'tableHeader'},
+					{text: mixBus15pans[3],style:'tableHeader'},
+					{text: mixBus15pans[4],style:'tableHeader'},
+					{text: mixBus15pans[5],style:'tableHeader'},
+					{text: mixBus15pans[6],style:'tableHeader'},
+					{text: mixBus15pans[7],style:'tableHeader'},
+					{text: mixBus15pans[8],style:'tableHeader'},
+				],
 				[
 					{text: mixBus15ons[0],style:'rowHeader'},
 					{text: mixBus15ons[1],style:'tableHeader'},
@@ -1400,8 +1659,8 @@ class DocumentDefinition {
 			this.addContent(tabConfigurations);
 			this.addContent(tabPreamps);
 			this.addContent(tabGates);
-			this.addContent(tabDynamics);			
 			this.addContent(tabInserts);
+			this.addContent(tabDynamics);			
 			this.addContent(tabEqs);
 			this.addContent(tabMixs);
 
@@ -1410,18 +1669,20 @@ class DocumentDefinition {
 	}
 }
 
-function cell (text, onOption='') {
-	// console.log(text, onOption)
-	text = (text == 'OFF') ? Off : text;
+function cell (text, onOption='', offOption='') {
+	// console.log(text, onOption) 
 	text = (text == 'POST') ? 'Post' : text;
 	text = (text == 'GATE') ? 'Gate' : text;
+	// text = (text == '-oo') ? String.fromCharCode(0x221E) : text;
 	text = (text == 'ON' && onOption != '') ? onOption : text;
 	text = (text == 'ON' && onOption == '') ? On : text;
+	text = (text == 'OFF' && offOption != '') ? offOption : text;
+	text = (text == 'OFF' && offOption == '') ? Off : text;
 	return {text: text, style: 'tableCell'};
 }
 
-function rowHeader( text ) {
-  return	[{text: text, style: 'rowHeader'}]
+function rowHeader( text , style='rowHeader') {
+  return	[{text: text, style: style}]
 }
 
 function simple( text ) {
@@ -1434,6 +1695,16 @@ function muted(OnOff) {
 	} else if (OnOff == 'Off' || OnOff == 'OFF') {
 		return 'On';
  	} else return OnOff;
+}
+
+function freq(f) {
+	if (typeof f != 'string') f = f.toString();
+	var i = f.indexOf('k');
+	if (i != -1) {
+    	var s = f.split('k');
+    	f = s[0]+','+(s[1]+'000').substring(0,3);
+ 	} 
+	return f;
 }
 
 module.exports = DocumentDefinition;
