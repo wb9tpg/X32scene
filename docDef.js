@@ -1,5 +1,6 @@
 var winston = require('winston');
 var moment = require('moment');
+var tableClass = require('./tableClass');
 
 var Off = 'Off';
 var On = 'On';
