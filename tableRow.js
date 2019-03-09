@@ -2,20 +2,28 @@
 
 class tableRow {
 
-	constructor ( title = '', style ='rowHeader') {
+	constructor ( title = '', style ='rowHeader', span=1) {
 		// the row is an array of objects - initialize it
 		this._row = [];
-		this.newColumn(title, style);
+		this.newColumn(title, style, span);
 		return this;
 		// this._row = [{text: title},'b','c','d','e','f','g','h','i']
 	}
 
 // {"text":"Configuration","style":"sectionHeader","colSpan":9,"border":[false,false,false,false]},{},{},{},{},{},{},{},{}
 
-	newColumn( text, style='tableCell' ) {
+	newColumn( text, style='tableCell', span=1 ) {
 		// add another column with a 'text' property
-		this._row.push({text: text, style: style});
-		return this;
+		if (span == 1) {
+			this._row.push({text: text, style: style});
+		} else {
+			this._row.push({text: text, style: style, colSpan: span});
+			for (var i = 1; i < span; i++) {
+				this._row.push({});
+			}
+		}
+	// console.log(this._row)
+ 	return this
 	}
 
 

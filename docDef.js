@@ -67,18 +67,24 @@ class DocumentDefinition {
 			var ChIds = [
 				'',Pt+chN[0], Pt+chN[1], Pt+chN[2], Pt+chN[3], Pt+chN[4], Pt+chN[5], Pt+chN[6], Pt+chN[7]
 			];
-			// Configuration Section
-			// var CHtest	= new tableRow('Name');
 
-			var names   = new tableRow('Name');
-			var colors  = rowHeader('Color');
-			var sources = rowHeader('Input Bus');
-			var ports   = rowHeader('Source');
-			var delays  = rowHeader('Delay');
-			var links   = rowHeader('Linked');
-			var dcas    = rowHeader('DCA');
-			var mutes   = rowHeader('Mute Groups');
-			var automixs= rowHeader('Automix');
+			/////////////////////////////////////
+			// Configuration Section
+			/////////////////////////////////////
+			var names  			= new tableRow('Name');
+			var colors 			= new tableRow('Color');
+			var ports  			= new tableRow('Source');
+			var delays 			= new tableRow('Delay');
+			var links   		= new tableRow('Linked');
+			var mixEnableds		= new tableRow('Hard Mute');
+			var mutes   		= new tableRow('Mute Groups');
+			var mixFaders		= new tableRow('Fader (dB)');
+			var mixLRons		= new tableRow('LR Bus On / Off');
+			var mixLRpans		= new tableRow('LR Pan');
+			var mixMONOons		= new tableRow('Mono Bus On/Off');
+			var mixMONOlevels	= new tableRow('Mono Level (dB)');
+			var dcas   			= new tableRow('DCA');
+			var automixs		= new tableRow('Automix');
 
 			// Preamp Section
 			var trims   = rowHeader('Trim (dB)');
@@ -143,12 +149,6 @@ class DocumentDefinition {
 			var eq4Qs     = rowHeader('#4 Q');
 
 			// Mix
-			var mixEnableds		= rowHeader('Hard Mute');
-			var mixFaders		= rowHeader('Fader (dB)');
-			var mixLRons		= rowHeader('LR Bus On / Off');
-			var mixLRpans		= rowHeader('LR Pan');
-			var mixMONOons		= rowHeader('Mono Bus On/Off');
-			var mixMONOlevels   = rowHeader('Mono Level (dB)');
 			var mixBus01ons		= rowHeader('Bus 01 On / Off');
 			var mixBus02ons		= rowHeader('Bus 02 On / Off');
 			var mixBus03ons		= rowHeader('Bus 03 On / Off');
@@ -219,18 +219,30 @@ class DocumentDefinition {
 				IDs.push('Ch'+chId);
 				ChIds.push({text: 'Ch'+chId});
 				
+				//////////////////////////////////
 				// Configuration
-				// CHtest.newColumn(config.name);
+				//////////////////////////////////
 				names.newColumn(config.name);
-				colors.push(cell(config.color));
-				ports.push({text: (config.source=='OFF')? Off : this.x32['config']['routing']['ports'][source], style: 'tableCell'});
-				delays.push(cell(delay.on, delay.time));
-				links.push((typeof config['linked'] === 'undefined') ? {} : {text: ((config.linked=='ON')?On:Off), style:'tableCell', colSpan:2 } );
-				dcas.push(cell(grp.dca.str));
-				mutes.push(cell(grp.mute.str));
-				automixs.push(cell(
+				colors.newColumn(config.color);
+				ports.newColumn(
+					(config.source=='OFF') ? 
+						Off : 
+						this.x32['config']['routing']['ports'][source]
+				);
+				delays.newColumn( (delay.on == 'OFF') ? Off : delay.time );
+				if (typeof config['linked']  != 'undefined') links.newColumn( config['linked'], undefined, 2);
+				mixEnableds.newColumn(muted(mix.on));	
+				mutes.newColumn(grp.mute.str);
+				mixFaders.newColumn(mix.fader);	 
+				mixLRons.newColumn(mix.st);
+				mixLRpans.newColumn(mix.pan);
+				mixMONOons.newColumn(mix.mono);
+				mixMONOlevels.newColumn(mix.mlevel);
+				dcas.newColumn(grp.dca.str);
+				automixs.newColumn(
 					(autoMix.group == 'OFF') ? Off : (autoMix.group+': '+autoMix.weight)
-				)); 
+				); 
+
 
 				// Preamp
 				trims.push(cell(preamp.trim));
@@ -294,13 +306,6 @@ class DocumentDefinition {
 				eq4Gs.push(   cell(eq['4']['g']));
 				eq4Qs.push(   cell(eq['4']['q']));
 
-				// Mix - Main LR Bus
-				mixEnableds.push(cell(muted(mix.on)));	
-				mixFaders.push(cell(mix.fader));	 
-				mixLRons.push(cell(mix.st));
-				mixLRpans.push(cell(mix.pan));
-				mixMONOons.push(cell(mix.mono));
-				mixMONOlevels.push(cell(mix.mlevel));
 
 				mixBus01ons.push(cell(mix['01']['on']));
 				mixBus02ons.push(cell(mix['02']['on']));
@@ -353,172 +358,28 @@ class DocumentDefinition {
 			
 			}
 
+			// console.log(links.getRow());
+
 			tabConfigurations.table.body.push(
 
 				// Configuration Header
 				[ {text:'Configuration',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
 				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
 
-				// Scribble Strip Names
 				names.getRow(),
-				// [
-				// 	{text: names[0],style:'rowHeader'},
-				// 	{text: names[1]},
-				// 	{text: names[2]},
-				// 	{text: names[3]},
-				// 	{text: names[4]},
-				// 	{text: names[5]},
-				// 	{text: names[6]},
-				// 	{text: names[7]},
-				// 	{text: names[8]},
-				// ],
-				// Scribble Strip Colors
-				[
-					{text: colors[0],style:'rowHeader'},
-					{text: colors[1],style:'tableHeader'},
-					{text: colors[2],style:'tableHeader'},
-					{text: colors[3],style:'tableHeader'},
-					{text: colors[4],style:'tableHeader'},
-					{text: colors[5],style:'tableHeader'},
-					{text: colors[6],style:'tableHeader'},
-					{text: colors[7],style:'tableHeader'},
-					{text: colors[8],style:'tableHeader'},
-				],
-				// Port selected
-				[ 
-					{text: ports[0],style:'rowHeader'},
-					{text: ports[1],style:'tableHeader'},
-					{text: ports[2],style:'tableHeader'},
-					{text: ports[3],style:'tableHeader'},
-					{text: ports[4],style:'tableHeader'},
-					{text: ports[5],style:'tableHeader'},
-					{text: ports[6],style:'tableHeader'},
-					{text: ports[7],style:'tableHeader'},
-					{text: ports[8],style:'tableHeader'},
-				],
-				// Delay settings
-				[ 
-					{text: delays[0],style:'rowHeader'},
-					{text: delays[1],style:'tableHeader'},
-					{text: delays[2],style:'tableHeader'},
-					{text: delays[3],style:'tableHeader'},
-					{text: delays[4],style:'tableHeader'},
-					{text: delays[5],style:'tableHeader'},
-					{text: delays[6],style:'tableHeader'},
-					{text: delays[7],style:'tableHeader'},
-					{text: delays[8],style:'tableHeader'},
-				],
-				// Linked settings
-				[ 
-					{text: links[0],style:'rowHeader'},
-					{text: links[1],style:'tableHeader',colSpan:2},
-					{},
-					{text: links[3],style:'tableHeader',colSpan:2},
-					{},
-					{text: links[5],style:'tableHeader',colSpan:2},
-					{},
-					{text: links[7],style:'tableHeader',colSpan:2},
-					{},
-				],
-				[
-					{text: mixEnableds[0],style:'rowHeader'},
-					{text: mixEnableds[1],style:'tableHeader'},
-					{text: mixEnableds[2],style:'tableHeader'},
-					{text: mixEnableds[3],style:'tableHeader'},
-					{text: mixEnableds[4],style:'tableHeader'},
-					{text: mixEnableds[5],style:'tableHeader'},
-					{text: mixEnableds[6],style:'tableHeader'},
-					{text: mixEnableds[7],style:'tableHeader'},
-					{text: mixEnableds[8],style:'tableHeader'},
-				],	
-				[
-					{text: mutes[0],style:'rowHeader'},
-					{text: mutes[1],style:'tableHeader'},
-					{text: mutes[2],style:'tableHeader'},
-					{text: mutes[3],style:'tableHeader'},
-					{text: mutes[4],style:'tableHeader'},
-					{text: mutes[5],style:'tableHeader'},
-					{text: mutes[6],style:'tableHeader'},
-					{text: mutes[7],style:'tableHeader'},
-					{text: mutes[8],style:'tableHeader'},
-				],			
-				[
-					{text: mixFaders[0],style:'rowHeader'},
-					{text: mixFaders[1],style:'tableHeader'},
-					{text: mixFaders[2],style:'tableHeader'},
-					{text: mixFaders[3],style:'tableHeader'},
-					{text: mixFaders[4],style:'tableHeader'},
-					{text: mixFaders[5],style:'tableHeader'},
-					{text: mixFaders[6],style:'tableHeader'},
-					{text: mixFaders[7],style:'tableHeader'},
-					{text: mixFaders[8],style:'tableHeader'},
-				],	
-				[
-					{text: mixLRons[0],style:'rowHeader'},
-					{text: mixLRons[1],style:'tableHeader'},
-					{text: mixLRons[2],style:'tableHeader'},
-					{text: mixLRons[3],style:'tableHeader'},
-					{text: mixLRons[4],style:'tableHeader'},
-					{text: mixLRons[5],style:'tableHeader'},
-					{text: mixLRons[6],style:'tableHeader'},
-					{text: mixLRons[7],style:'tableHeader'},
-					{text: mixLRons[8],style:'tableHeader'},
-				],	
-				[
-					{text: mixLRpans[0],style:'rowHeader'},
-					{text: mixLRpans[1],style:'tableHeader'},
-					{text: mixLRpans[2],style:'tableHeader'},
-					{text: mixLRpans[3],style:'tableHeader'},
-					{text: mixLRpans[4],style:'tableHeader'},
-					{text: mixLRpans[5],style:'tableHeader'},
-					{text: mixLRpans[6],style:'tableHeader'},
-					{text: mixLRpans[7],style:'tableHeader'},
-					{text: mixLRpans[8],style:'tableHeader'},
-				],
-				[
-					{text: mixMONOons[0],style:'rowHeader'},
-					{text: mixMONOons[1],style:'tableHeader'},
-					{text: mixMONOons[2],style:'tableHeader'},
-					{text: mixMONOons[3],style:'tableHeader'},
-					{text: mixMONOons[4],style:'tableHeader'},
-					{text: mixMONOons[5],style:'tableHeader'},
-					{text: mixMONOons[6],style:'tableHeader'},
-					{text: mixMONOons[7],style:'tableHeader'},
-					{text: mixMONOons[8],style:'tableHeader'},
-				],			
-				[
-					{text: mixMONOlevels[0],style:'rowHeader'},
-					{text: mixMONOlevels[1],style:'tableHeader'},
-					{text: mixMONOlevels[2],style:'tableHeader'},
-					{text: mixMONOlevels[3],style:'tableHeader'},
-					{text: mixMONOlevels[4],style:'tableHeader'},
-					{text: mixMONOlevels[5],style:'tableHeader'},
-					{text: mixMONOlevels[6],style:'tableHeader'},
-					{text: mixMONOlevels[7],style:'tableHeader'},
-					{text: mixMONOlevels[8],style:'tableHeader'},
-				],			
-				[
-					{text: dcas[0],style:'rowHeader'},
-					{text: dcas[1],style:'tableHeader'},
-					{text: dcas[2],style:'tableHeader'},
-					{text: dcas[3],style:'tableHeader'},
-					{text: dcas[4],style:'tableHeader'},
-					{text: dcas[5],style:'tableHeader'},
-					{text: dcas[6],style:'tableHeader'},
-					{text: dcas[7],style:'tableHeader'},
-					{text: dcas[8],style:'tableHeader'},
-				],			
-				[
-					{text: automixs[0],style:'rowHeader'},
-					{text: automixs[1],style:'tableHeader'},
-					{text: automixs[2],style:'tableHeader'},
-					{text: automixs[3],style:'tableHeader'},
-					{text: automixs[4],style:'tableHeader'},
-					{text: automixs[5],style:'tableHeader'},
-					{text: automixs[6],style:'tableHeader'},
-					{text: automixs[7],style:'tableHeader'},
-					{text: automixs[8],style:'tableHeader'},
-				],			
+				colors.getRow(),
+				ports.getRow(),
+				delays.getRow(),
+				links.getRow(),
+				mixEnableds.getRow(),
+				mutes.getRow(),
+				mixFaders.getRow(),
+				mixLRons.getRow(),
+				mixLRpans.getRow(),
+				mixMONOons.getRow(),
+				mixMONOlevels.getRow(),
+				dcas.getRow(),
+				automixs.getRow(),
 
 			);
 
@@ -1700,6 +1561,7 @@ function simple( text ) {
 	return {text: text} 
 }
 
+// the beringer logic is backwards so reverse it to make it readable
 function muted(OnOff) {
 	if (OnOff == 'On' || OnOff == 'ON') {
 		return 'Off';
