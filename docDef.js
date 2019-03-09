@@ -202,17 +202,17 @@ class DocumentDefinition {
 			for (var j=0; j<8; j++) {
 
 				var chId = chN[j];  
-				var config = this.x32['ch'][chId]['config'];				
-				var delay = this.x32['ch'][chId]['delay'];				
-				var preamp = this.x32['ch'][chId]['preamp'];				
-				var gate = this.x32['ch'][chId]['gate'];				
-				var dyn = this.x32['ch'][chId]['dyn'];				
-				var insert = this.x32['ch'][chId]['insert'];				
-				var eq = this.x32['ch'][chId]['eq'];				
-				var mix = this.x32['ch'][chId]['mix'];				
-				var grp = this.x32['ch'][chId]['grp'];				
-				var autoMix = this.x32['ch'][chId]['automix'];			
-				var source = this.x32['ch'][chN[j]]['config']['source']; 
+				var config 	= this.x32[pt][chId]['config'];				
+				var delay 	= this.x32[pt][chId]['delay'];				
+				var preamp 	= this.x32[pt][chId]['preamp'];				
+				var gate 	= this.x32[pt][chId]['gate'];				
+				var dyn 	= this.x32[pt][chId]['dyn'];				
+				var insert 	= this.x32[pt][chId]['insert'];				
+				var eq 		= this.x32[pt][chId]['eq'];				
+				var mix 	= this.x32[pt][chId]['mix'];				
+				var grp 	= this.x32[pt][chId]['grp'];				
+				var autoMix = this.x32[pt][chId]['automix'];			
+				var source 	= this.x32[pt][chN[j]]['config']['source']; 
 
 
 
