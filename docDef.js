@@ -86,10 +86,12 @@ class DocumentDefinition {
 			var dcas   			= new tableRow('DCA');
 			var automixs		= new tableRow('Automix');
 
+			/////////////////////////////////////
 			// Preamp Section
-			var trims   = rowHeader('Trim (dB)');
-			var inverts = rowHeader('Reverse / Invert');
-			var lowcuts = rowHeader('Low Cut (Hz)');
+			/////////////////////////////////////
+			var trims   = new tableRow('Trim (dB)');
+			var inverts = new tableRow('Reverse / Invert');
+			var lowcuts = new tableRow('Low Cut (Hz)');
 
 			// Gate Section
 			var gateOns  = rowHeader('On / Off');
@@ -243,11 +245,12 @@ class DocumentDefinition {
 					(autoMix.group == 'OFF') ? Off : (autoMix.group+': '+autoMix.weight)
 				); 
 
-
+				/////////////////////////////////////
 				// Preamp
-				trims.push(cell(preamp.trim));
-				inverts.push(cell(preamp.invert));
-				lowcuts.push(cell(preamp.hpon, freq(preamp.hpf)));
+				/////////////////////////////////////
+				trims.newColumn(preamp.trim);
+				inverts.newColumn(preamp.invert);
+				lowcuts.newColumn( (preamp.hpon == 'ON') ? freq(preamp.hpf) : 'OFF');
 
 				// gate
 				gateOns.push(cell(gate.on));
@@ -360,9 +363,10 @@ class DocumentDefinition {
 
 			// console.log(links.getRow());
 
+			/////////////////////////////////////////////
+			// Configuration 
+			/////////////////////////////////////////////
 			tabConfigurations.table.body.push(
-
-				// Configuration Header
 				[ {text:'Configuration',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
 				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
 
@@ -383,47 +387,15 @@ class DocumentDefinition {
 
 			);
 
-winston.debug(tabConfigurations.table.body)
-
+			/////////////////////////////////////////////
+			// Preamps
+			/////////////////////////////////////////////
 			tabPreamps.table.body.push(
-				// Preamp Header
 				[ {text:'Preamp',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
-				// Column Titles	
 				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
-				// Home Tab - Trims
-				[
-					{text: trims[0],style:'rowHeader'},
-					{text: trims[1],style:'tableHeader'},
-					{text: trims[2],style:'tableHeader'},
-					{text: trims[3],style:'tableHeader'},
-					{text: trims[4],style:'tableHeader'},
-					{text: trims[5],style:'tableHeader'},
-					{text: trims[6],style:'tableHeader'},
-					{text: trims[7],style:'tableHeader'},
-					{text: trims[8],style:'tableHeader'},
-				],
-				[
-					{text: inverts[0],style:'rowHeader'},
-					{text: inverts[1],style:'tableHeader'},
-					{text: inverts[2],style:'tableHeader'},
-					{text: inverts[3],style:'tableHeader'},
-					{text: inverts[4],style:'tableHeader'},
-					{text: inverts[5],style:'tableHeader'},
-					{text: inverts[6],style:'tableHeader'},
-					{text: inverts[7],style:'tableHeader'},
-					{text: inverts[8],style:'tableHeader'},
-				],
-				[
-					{text: lowcuts[0],style:'rowHeader'},
-					{text: lowcuts[1],style:'tableHeader'},
-					{text: lowcuts[2],style:'tableHeader'},
-					{text: lowcuts[3],style:'tableHeader'},
-					{text: lowcuts[4],style:'tableHeader'},
-					{text: lowcuts[5],style:'tableHeader'},
-					{text: lowcuts[6],style:'tableHeader'},
-					{text: lowcuts[7],style:'tableHeader'},
-					{text: lowcuts[8],style:'tableHeader'},
-				],
+				trims.getRow(),
+				inverts.getRow(),
+				lowcuts.getRow(),
 			);
 
 			tabGates.table.body.push(
