@@ -25,7 +25,7 @@ class DocumentDefinition {
 	buildSceneDocument(x32) {
 		this.x32 = x32;
 		this.titlePage();
-		this.channelPage();
+		this.buildPages('ch');
 	}
 
 	titlePage ( ) {
@@ -43,7 +43,7 @@ class DocumentDefinition {
 		return (title=='') ? ([{text: ' ', colSpan:9, style:'tableHeader', border: [false,false,false,false]},{},{},{},{},{},{},{},{}]) : ([{text: title,colSpan:9,style:'tableHeader',alignment:'center',border:[false,false,false,false]},{},{},{},{},{},{},{},{}]);
 	}  
 
-	channelPage ( ) {
+	buildPages ( pageType ) {
 		for (var i=0; i<32; i=i+8) {
 			var w = 42;
 			var tabConfigurations = {pageBreak: 'before',style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
