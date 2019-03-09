@@ -90,7 +90,7 @@ rd.on('close', function() {
 	winston.info('Formatting Scene Document');
 	dd.buildSceneDocument(x32);
 	var prettyJSON = JSON.stringify(x32, (k, v) => v === undefined ? null : v, 4);
- 	winston.debug(prettyJSON);
+ 	// winston.debug(prettyJSON);
 	printer.outputPDF(dd.getDD(), 'output.pdf');
 	winston.info("Scene Document Complete");
 });

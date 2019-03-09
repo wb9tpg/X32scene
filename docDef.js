@@ -1,6 +1,10 @@
 var winston = require('winston');
 var moment = require('moment');
-var tableClass = require('./tableClass');
+var tableRow = require('./tableRow');
+
+String.prototype.toProperCase = function () {
+    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+};
 
 var Off = 'Off';
 var On = 'On';
@@ -44,7 +48,8 @@ class DocumentDefinition {
 		return (title=='') ? ([{text: ' ', colSpan:9, style:'tableHeader', border: [false,false,false,false]},{},{},{},{},{},{},{},{}]) : ([{text: title,colSpan:9,style:'tableHeader',alignment:'center',border:[false,false,false,false]},{},{},{},{},{},{},{},{}]);
 	}  
 
-	buildPages ( pageType ) {
+	buildPages ( pt ) {
+		var Pt = pt.toProperCase();
 		for (var i=0; i<32; i=i+8) {
 			var w = 42;
 			var tabConfigurations = {pageBreak: 'before',style: 'tableExample', table: {headerRows: 2, widths: ['*',w,w,w,w,w,w,w,w],body: [] }};
@@ -60,10 +65,12 @@ class DocumentDefinition {
 			// var ids = [{text: ' ',border:[false,false,false,false]}]
 			var IDs = ['x']
 			var ChIds = [
-				'','Ch'+chN[0], 'Ch'+chN[1], 'Ch'+chN[2], 'Ch'+chN[3], 'Ch'+chN[4], 'Ch'+chN[5], 'Ch'+chN[6], 'Ch'+chN[7]
+				'',Pt+chN[0], Pt+chN[1], Pt+chN[2], Pt+chN[3], Pt+chN[4], Pt+chN[5], Pt+chN[6], Pt+chN[7]
 			];
 			// Configuration Section
-			var names   = rowHeader('Name');
+			// var CHtest	= new tableRow('Name');
+
+			var names   = new tableRow('Name');
 			var colors  = rowHeader('Color');
 			var sources = rowHeader('Input Bus');
 			var ports   = rowHeader('Source');
@@ -213,7 +220,8 @@ class DocumentDefinition {
 				ChIds.push({text: 'Ch'+chId});
 				
 				// Configuration
-				names.push(cell(config.name));
+				// CHtest.newColumn(config.name);
+				names.newColumn(config.name);
 				colors.push(cell(config.color));
 				ports.push({text: (config.source=='OFF')? Off : this.x32['config']['routing']['ports'][source], style: 'tableCell'});
 				delays.push(cell(delay.on, delay.time));
@@ -346,24 +354,24 @@ class DocumentDefinition {
 			}
 
 			tabConfigurations.table.body.push(
+
 				// Configuration Header
 				[ {text:'Configuration',style:'sectionHeader',colSpan:9,border:[false,false,false,false]},{},{},{},{},{},{},{},{},],
-				// Column Titles	
 				[{text:'',border:[false,false,false,false]}, {text: ChIds[1],style:'tableHeader'}, {text: ChIds[2],style:'tableHeader'}, {text: ChIds[3],style:'tableHeader'}, {text: ChIds[4],style:'tableHeader'}, {text: ChIds[5],style:'tableHeader'}, {text: ChIds[6],style:'tableHeader'}, {text: ChIds[7],style:'tableHeader'}, {text: ChIds[8],style:'tableHeader'}, ],
-				// Temporary Design Aid Index Row
-				// ['0','1','2','3','4','5','6','7','8',],
+
 				// Scribble Strip Names
-				[
-					{text: names[0],style:'rowHeader'},
-					{text: names[1]},
-					{text: names[2]},
-					{text: names[3]},
-					{text: names[4]},
-					{text: names[5]},
-					{text: names[6]},
-					{text: names[7]},
-					{text: names[8]},
-				],
+				names.getRow(),
+				// [
+				// 	{text: names[0],style:'rowHeader'},
+				// 	{text: names[1]},
+				// 	{text: names[2]},
+				// 	{text: names[3]},
+				// 	{text: names[4]},
+				// 	{text: names[5]},
+				// 	{text: names[6]},
+				// 	{text: names[7]},
+				// 	{text: names[8]},
+				// ],
 				// Scribble Strip Colors
 				[
 					{text: colors[0],style:'rowHeader'},
@@ -513,6 +521,8 @@ class DocumentDefinition {
 				],			
 
 			);
+
+winston.debug(tabConfigurations.table.body)
 
 			tabPreamps.table.body.push(
 				// Preamp Header

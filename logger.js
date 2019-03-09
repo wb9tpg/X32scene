@@ -18,8 +18,8 @@ winston.add(
 		options: { flags: 'w' },
 		level: 'debug',
 		// format: tsFormat,
-    	// format:	winston.format.simple(),
-		format: winston.format.printf(info => `${new Date().toISOString()} ${info.message}`),
+    	format:	winston.format.json(),
+		// format: winston.format.printf(info => `${new Date().toISOString()} ${info.message}`),
 	})
 );
 
